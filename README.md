@@ -1,2 +1,3 @@
-# simplePHPLoginSystem
-Just a simple registration and login system with a working demo. Made using PHP.
+# Just a very barebones PHP login system
+
+Please note that this is is still WIP.
