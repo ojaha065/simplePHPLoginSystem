@@ -35,7 +35,7 @@
             <form method="POST" action="utils/login.php">
                 <div class="form-group">
                     <label for="username">Username:</label>
-                    <input class="form-control" type="text" id="username" name="username" minlength="3" maxlength="30" required />
+                    <input class="form-control" type="text" id="username" name="username" required />
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>

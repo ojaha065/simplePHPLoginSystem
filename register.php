@@ -31,7 +31,7 @@
             <form method="POST" action="utils/register.php">
                 <div class="form-group">
                     <label for="username">Username:</label>
-                    <input class="form-control" type="text" id="username" name="username" placeholder="At least 3 characters long" minlength="3" maxlength="30" required /> <!-- You can modify min/maxlength to fit your needs. -->
+                    <input class="form-control" type="text" id="username" name="username" required />
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>

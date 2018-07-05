@@ -23,13 +23,13 @@
         if(usernameNotAvailable($connection,$username)){
             returnWithError("usernameNotAvailable");
         }
-        elseif(strlen($username) < 3){
+        elseif(strlen($username) < $usernameMinLength){
             returnWithError("usernameTooShort");
         }
         elseif(strlen($password) < 8){
             returnWithError("passwordTooShort");
         }
-        elseif(strlen($username) > 30 || strlen($password) > 255){
+        elseif(strlen($username) > $usernameMaxLength || strlen($password) > 255){
             returnWithError("tooLongInput");
         }
         else{ // Kaikki vaikuttaa olevan OK

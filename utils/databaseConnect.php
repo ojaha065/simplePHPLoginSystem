@@ -8,7 +8,7 @@
 
     ////// MODIFY THESE TO FIT YOUR ENVIRONMENT  
     $host = "localhost";
-    $port = "3306";
+    $port = "3306"; // MySQL default: 3306
     $databaseName = "mydatabase";
     $databaseUsername = "root";
     $databasePassword = "";
