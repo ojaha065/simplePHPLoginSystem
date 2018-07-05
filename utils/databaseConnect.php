@@ -8,6 +8,7 @@
 
     ////// MODIFY THESE TO FIT YOUR ENVIRONMENT  
     $host = "localhost";
+    $port = "3306";
     $databaseName = "mydatabase";
     $databaseUsername = "root";
     $databasePassword = "";
@@ -15,7 +16,7 @@
     ////// DO NOT MODIFY ANYTHING BELOW THIS LINE
 
     try{
-        $connection = "mysql:host=$host;dbname=$databaseName";
+        $connection = "mysql:host=$host:$port;dbname=$databaseName";
         $connection = new PDO($connection,$databaseUsername,$databasePassword);
         $connection->exec("SET CHARACTER SET utf8;");
     }
