@@ -1,10 +1,17 @@
 <?php
     /*
         Simple PHP registration and login system
+        https://github.com/ojaha065/simplePHPLoginSystem
         (C) Jani Haiko, 2018
     */
     
     echo "If you are reading this, then your account creation is taking longer than expected...";
+
+    require_once "../config/config.php";
+
+    if($disableUserSelfRegistration){
+        returnWithError("notAllowed");
+    }
 
     require_once "databaseConnect.php"; // Require pysäyttää suorituksen virheen tapahtuessa, toisin kuin include().
 

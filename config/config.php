@@ -5,9 +5,6 @@
         (C) Jani Haiko, 2018
     */
 
-    session_start();
-    unset($_SESSION["username"]);
-    session_destroy(); // Tuhoaa session
-
-    header("location: ../index.php");
+    // Also use similar setting in config.js to disable UI-elements.
+    $disableUserSelfRegistration = false;
 ?>

@@ -2,10 +2,15 @@
 
 /*
     Simple PHP registration and login system
+    https://github.com/ojaha065/simplePHPLoginSystem
     (C) Jani Haiko, 2018
 */
 
 $(document).ready(function(){
+    if(disableUserSelfRegistration){
+        $("#selfRegistrationLink").hide();
+    }
+
     switch(getUrlParameter("returnCode")){
         case "accountCreated":
             $(".alert").addClass("alert-success");
