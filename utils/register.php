@@ -13,7 +13,7 @@
         returnWithError("notAllowed");
     }
 
-    require_once "databaseConnect.php"; // Require pysäyttää suorituksen virheen tapahtuessa, toisin kuin include().
+    require_once "databaseConnect.php";
 
     if(isset($_POST["username"]) && isset($_POST["password"])){
         $username = $_POST["username"];
@@ -32,10 +32,8 @@
         elseif(strlen($username) > $usernameMaxLength || strlen($password) > 255){
             returnWithError("tooLongInput");
         }
-        else{ // Kaikki vaikuttaa olevan OK
+        else{
 
-            // Käytetään salasanan salakirjoittamiseen ja suolaamiseen uudempaa password_hash()-funktiota crypt-funktion sijaan.
-            // On kuitenkin tärkeää huomata, että password_hash() ei toimi kaikkein vanhimmissa PHP:n versioissa.
             $hashedPassword = password_hash($password,PASSWORD_DEFAULT);
 
             $query = $connection->prepare("INSERT INTO users (username,password) VALUES (:username, :password)");
@@ -57,7 +55,7 @@
         $query = $connection->prepare("SELECT * FROM users WHERE username = :username");
         $query->bindParam(":username",$username);
         $query->execute();
-        $result = $query->fetch(); // NULL jos mitään ei löydy.
+        $result = $query->fetch();
         if($result == NULL){
             return false;
         }

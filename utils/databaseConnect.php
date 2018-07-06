@@ -21,10 +21,9 @@
         $connection->exec("SET CHARACTER SET utf8;");
     }
     catch(PDOException $e){
-        // Tuhotaan mahdollinen olemassa oleva sessio
         session_start();
         unset($_SESSION["username"]);
-        session_destroy(); // Tuhoaa session
+        session_destroy();
         header("location: ../login.php?returnCode=connectionError");
         die();
     }

@@ -7,7 +7,7 @@
 
     session_start();
     unset($_SESSION["username"]);
-    session_destroy(); // Tuhoaa session
+    session_destroy();
 
     header("location: ../index.php");
 ?>

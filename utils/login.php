@@ -13,11 +13,10 @@
         $username = $_POST["username"];
         $password = $_POST["password"];
 
-        // Haetaan tämän käyttäjän salasana tietokannasta.
         $query = $connection->prepare("SELECT password FROM users WHERE username = BINARY :username"); // Binary == Huomioi kirjainkoko
         $query->bindParam(":username",$username);
         $query->execute();
-        $result = $query->fetch(); // NULL jos mitään ei löydy.
+        $result = $query->fetch();
 
         if($result == NULL){
             returnWithError("usernameNotFound");
@@ -31,7 +30,7 @@
             header("location: ../index.php");
         }
         else{
-            returnWithError("usernameNotFound"); // On turvallisuusriski kertoa, että nimenomaan salasana oli väärin, koska tällöin 'pahis' saa tietoonsa, että käyttäjätunnus on olemassa.
+            returnWithError("usernameNotFound");
         }
     }
     else{
@@ -46,6 +45,6 @@
     }
 
     function passwordIsCorrect($password,$hash){
-        return password_verify($password,$hash); // Palauttaa true tai false
+        return password_verify($password,$hash);
     }
 ?>
