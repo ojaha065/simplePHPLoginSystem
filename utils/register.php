@@ -29,7 +29,7 @@
         elseif(strlen($password) < $passwordMinLength){
             returnWithError("passwordTooShort");
         }
-        elseif(strlen($username) > $usernameMaxLength || strlen($password) > 255){
+        elseif(strlen($username) > $usernameMaxLength || strlen($password) > 72){
             returnWithError("tooLongInput");
         }
         elseif(!preg_match($usernameRegExp,$username)){
