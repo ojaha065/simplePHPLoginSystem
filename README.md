@@ -77,7 +77,7 @@ As stated earlier, you need MySQL database. The database requires very little sp
 I'm planning to create something like that sometime in near future. Stay posted.
 
 #### I have a database but don't what any of that jargon about tables and colums mean. Help?
-Don't know your SQL? Don't worry, just wait little while. I'm planning to create a automatic wizard that can do most of this stuff for you.
+Don't know your SQL? Don't worry, just wait a little while. I'm planning to create a automatic wizard that can do most of this stuff for you.
 
 #### I don't know what port my database is using.
 MySQL default is 3306.
