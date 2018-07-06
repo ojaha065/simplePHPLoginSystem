@@ -30,9 +30,4 @@ $(document).ready(function(){
             break;
         default: $(".alert").alert("close");
     }
-
-    $("#username").attr({
-        minlength: usernameMinLength,
-        maxlength: usernameMaxLength
-    });
 });

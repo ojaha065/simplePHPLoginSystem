@@ -21,6 +21,12 @@ $(document).ready(function(){
         case "passwordTooShort":
             $("#errorArea").html("Your password is way too short. Try making it longer.");
             break;
+        case "usernameFailedRegExp":
+            $("#errorArea").html("That username is not allowed. Your username must follow these rules:<br />" + usernameRules);
+            break;
+        case "passwordFailedRegExp":
+            $("#errorArea").html("That password is not secure enough. Your password must follow these rules:<br />" + passwordRules);
+            break;
         case "tooLongInput":
             $("#errorArea").html("Error: Too long input");
             break;
@@ -35,6 +41,7 @@ $(document).ready(function(){
         maxlength: usernameMaxLength,
         placeholder: "At least " + usernameMinLength + " characters long"
     });
+    $("#password").attr("minlength",passwordMinLength);
 
     $("form").submit(function(e){
         e.preventDefault();

@@ -21,7 +21,7 @@
     </head>
     <body>
         <?php
-            echo "<h1>Welcome, ",htmlspecialchars($_SESSION['username']),"</h1>";
+            echo "<h1>Welcome, ",$_SESSION['username'],"</h1>";
         ?>
         <p>Here is my secret content that only registered users can see.</p>
         <a href="utils/logout.php">Logout</a>

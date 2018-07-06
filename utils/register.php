@@ -26,11 +26,17 @@
         elseif(strlen($username) < $usernameMinLength){
             returnWithError("usernameTooShort");
         }
-        elseif(strlen($password) < 8){
+        elseif(strlen($password) < $passwordMinLength){
             returnWithError("passwordTooShort");
         }
         elseif(strlen($username) > $usernameMaxLength || strlen($password) > 255){
             returnWithError("tooLongInput");
+        }
+        elseif(!preg_match($usernameRegExp,$username)){
+            returnWithError("usernameFailedRegExp");
+        }
+        elseif(!preg_match($passwordRegExp,$password)){
+            returnWithError("passwordFailedRegExp");
         }
         else{
 
