@@ -42,9 +42,10 @@
 
             $hashedPassword = password_hash($password,PASSWORD_DEFAULT);
 
-            $query = $connection->prepare("INSERT INTO users (username,password) VALUES (:username, :password)");
+            $query = $connection->prepare("INSERT INTO users (username,password,accessLevel) VALUES (:username, :password, :accessLevel)");
             $query->bindParam(":username",$username);
             $query->bindParam(":password",$hashedPassword);
+            $query->bindParam(":accessLevel",$newAccountAccessLevel);
 
             $query->execute();
             // TODO: Error handling

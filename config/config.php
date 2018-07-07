@@ -17,4 +17,7 @@
     // Do not modify these unless you know what you are doing.
     $usernameRegExp = "/^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/";
     $passwordRegExp = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{0,}$/";
+
+    // This should always be set to 'user'.
+    $newAccountAccessLevel = "user";
 ?>
