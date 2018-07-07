@@ -51,6 +51,7 @@ If you are also using front-end demo/sample I provide, then you can/must also ed
 | $passwordMinLength           | Minimum length of passwords                                | 8             | 1 ->             |
 | $usernameRegExp              | All usernames must match this regular expression           |               | any regExp       |
 | $passwordRegExp              | All usernames must match this regular expression           |               | any regExp       |
+| $newAccountAccessLevel       | Useful for creating your first admin account               | "user"        | "user", "admin"  |
 
 
 #### Config options in config.js
@@ -69,7 +70,7 @@ As stated earlier, you need MySQL database. The database requires very little sp
 
 ### Setting up the database
 0. Have a MySQL database that you have access to.
-1. Create table `users` with at least two colums: `username` and `password`. I would also add auto incrementing id field but that is not strictly required.
+1. Create table `users` with at least three colums: `username` , `password` and `accessLevel`. I would also add auto incrementing id field but that is not strictly required.
 2. Insert your database hostname, port, name and credentials into **/utils/databaseConnect.php**. I recommend creating dedicated account with restricted permissions.
 
 ### FAQ
@@ -87,5 +88,6 @@ If you are able to run SQL queries inside you database (it's easy to do in phpMy
 CREATE TABLE users (
  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
  username VARCHAR(64) NOT NULL UNIQUE,
- password VARCHAR(255) NOT NULL
+ password VARCHAR(255) NOT NULL,
+ accessLevel VARCHAR(10) NOT NULL
 );
