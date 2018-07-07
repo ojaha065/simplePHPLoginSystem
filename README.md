@@ -80,9 +80,6 @@ I'm planning to create something like that sometime in near future. Stay posted.
 #### I have a database but don't what any of that jargon about tables and colums mean. Help?
 Don't know your SQL? Don't worry, just wait a little while. I'm planning to create a automatic wizard that can do most of this stuff for you.
 
-#### I don't know what port my database is using.
-MySQL default is 3306.
-
 If you are able to run SQL queries inside you database (it's easy to do in phpMyAdmin, for example) then something like this should get you covered:
 ````SQL
 CREATE TABLE users (
@@ -91,3 +88,7 @@ CREATE TABLE users (
  password VARCHAR(255) NOT NULL,
  accessLevel VARCHAR(10) NOT NULL
 );
+````
+
+#### I don't know what port my database is using.
+MySQL default is 3306.
