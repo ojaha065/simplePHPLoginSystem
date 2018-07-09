@@ -17,6 +17,8 @@ This project started as a simple school assignment for some PHP course I was att
 
 _AKA 'Why there are so many files?'_
 
+#### /admin
+The admin panel will be here. Similarly to many other web applications (like WordPress) the admin panel can be easily accessed by typing _[host]/admin_. 
 #### /config
 This folder includes two files that are used to set some config options. More info below.
 #### /js
@@ -52,6 +54,9 @@ If you are also using front-end demo/sample I provide, then you can/must also ed
 | $usernameRegExp              | All usernames must match this regular expression           |               | any regExp       |
 | $passwordRegExp              | All usernames must match this regular expression           |               | any regExp       |
 | $newAccountAccessLevel       | Useful for creating your first admin account               | "user"        | "user", "admin"  |
+| $debugMode                   | Allows you to disable dabase connection (for testing only) | "no"          | "no"             |
+| $debugAdminUsername          | Allows you to log in while in debug mode                   | "admin"       | any string       |
+| $debugAdminPassword          | Allows you to log in while in debug mode                   | ""            | any string       |
 
 
 #### Config options in config.js
@@ -92,3 +97,28 @@ CREATE TABLE users (
 
 #### I don't know what port my database is using.
 MySQL default is 3306.
+
+## The admin panel
+
+_The admin panel is in very early stage of the development. Many things might be broken._
+
+Coming soon...
+
+## General FAQ
+### How do I turn on the debug mode?
+Read config.php more carefully.
+
+### I'm getting 'Connection error occured' message and I'm sure that my I have entered my database info correctly into **/utils/databaseConnect.php**
+That error message means that `PDOException` occured while trying to connect to the database. The most common causes are:
+1. Wrong database hostname, port, name or credentials.  
+ Double check them.
+2. The database is down.  
+ Can you access your database by using phpMyAdmin or similar?
+3. PHP's PDO interface or `PDO_MYSQL` driver is not available or configured properly.  
+ Try updating to the latest version of PHP if possible. Make sure you or your host enable `PDO_MYSQL`.
+4. Your host's firewall is blocking the connection.  
+ Make sure that your or your host's firewall is not blocking the connection to the $port.  
+5. Something else.  
+ Please open issue here on GitHub i and I try to figure it out.
+ 
+ I'm planning to introduce more verbose error messages sometime in the future to help with the situations like this.
