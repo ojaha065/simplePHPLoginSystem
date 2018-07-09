@@ -33,6 +33,9 @@ $(document).ready(function(){
         case "notAllowed":
             $("#errorArea").html("Error: You are not allowed to register at this time.");
             break;
+        case "securityError":
+            $("#errorArea").html("Error: There was an security problem and this registration was aborted. Please contact the website's administrator.");
+            break;
         case "valuesNotSet": $("#errorArea").html("Error: Values not set"); // This should never happen under normal circumstances.
     }
 

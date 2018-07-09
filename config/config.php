@@ -19,5 +19,14 @@
     $passwordRegExp = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{0,}$/";
 
     // This should always be set to 'user'.
+    // Set it to 'admin' to create your first admin account(s).
+    // REMEMBER TO CHANGE IT BACK AFTEWARDS. Otherwise anyone can create an account with admin access. And that's probably very bad...
     $newAccountAccessLevel = "user";
+
+    // Turning the debug mode ON disables database connection and only allows logging in with the username and password below.
+    // Using this in the production environment is a huge security risk. Don't do it, ever!
+    // If you are sure you want to turn the debug mode ON, change $debugMode to 'IKnowWhatIAmDoing'.
+    $debugMode = "no";
+    $debugAdminUsername = "admin";
+    $debugAdminPassword = "";
 ?>

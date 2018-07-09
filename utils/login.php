@@ -7,6 +7,29 @@
     
     echo "If you are reading this, then the login process is taking longer than excepted...";
 
+    require_once "../config/config.php";
+
+    if($debugMode === "IKnowWhatIAmDoing"){
+        if(isset($_POST["username"]) && isset($_POST["password"])){
+            $username = $_POST["username"];
+            $password = $_POST["password"];
+            
+            if($username === $debugAdminUsername && $password === $debugAdminPassword){
+                session_start();
+                $_SESSION["username"] = $username;
+                $_SESSION["accessLevel"] = "admin";
+                header("location: ../index.php");
+                die();
+            }
+            else{
+                returnWithError("usernameNotFound");
+            }
+        }
+        else{
+            returnWithError("valuesNotSet");
+        }
+    }
+
     require_once "databaseConnect.php";
 
     if(isset($_POST["username"]) && isset($_POST["password"])){

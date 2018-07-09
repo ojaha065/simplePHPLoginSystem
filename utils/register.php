@@ -9,6 +9,9 @@
 
     require_once "../config/config.php";
 
+    if($debugMode == "IKnowWhatIAmDoing"){
+        returnWithError("securityError");
+    }
     if($disableUserSelfRegistration){
         returnWithError("notAllowed");
     }

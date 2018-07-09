@@ -5,6 +5,7 @@
         (C) Jani Haiko, 2018
     */
 
+    require_once "../config/config.php";
     session_start();
 
     if(!isset($_SESSION["username"])){
@@ -12,6 +13,11 @@
         die();
     }
     else{
+        if($debugMode === "IKnowWhatIAmDoing" && $_SESSION["accessLevel"] === "admin"){
+            header("location: main.php");
+            die();
+        }
+
         require_once "../utils/databaseConnect.php";
         $username = $_SESSION["username"];
         $query = $connection->prepare("SELECT accessLevel FROM users WHERE username = BINARY :username");

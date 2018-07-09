@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    if(isset($_SESSION["username"])){ // Onko tämä käyttäjä jo kirjautunut?
+    if(isset($_SESSION["username"])){
         header("location: index.php");
     }
 ?>
