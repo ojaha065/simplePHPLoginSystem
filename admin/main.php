@@ -15,10 +15,10 @@
         require_once "../config/config.php";
         if($debugMode !== "IKnowWhatIAmDoing"){
             require_once "../utils/databaseConnect.php";
-            $query = $connection->prepare("SELECT username FROM users ORDER BY AccessLevel ASC");
+            $query = $connection->prepare("SELECT username FROM users ORDER BY AccessLevel");
             $query->execute();
             $usernames = $query->fetchAll();
-            $query = $connection->prepare("SELECT accessLevel FROM users ORDER BY AccessLevel ASC");
+            $query = $connection->prepare("SELECT accessLevel FROM users ORDER BY AccessLevel");
             $query->execute();
             $accessLevels = $query->fetchAll();
         }
@@ -60,8 +60,12 @@
                     <?php
                         if($debugMode !== "IKnowWhatIAmDoing"){
                             for($i = 0;$i < count($usernames);$i++){
+                                $extraInfo = "";
+                                if($usernames[$i][0] == $_SESSION["username"]){
+                                    $extraInfo = " <i>(Current account)</i>";
+                                }
                                 echo "<tr>
-                                    <td>",$usernames[$i][0],"</td>
+                                    <td>",$usernames[$i][0],$extraInfo,"</td>
                                     <td><i>Set</i>
                                     <td>",$accessLevels[$i][0],"</td>
                                     <td>TODO</td>
