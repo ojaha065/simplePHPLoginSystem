@@ -21,6 +21,8 @@ _AKA 'Why there are so many files?'_
 The admin panel will be here. Similarly to many other web applications (like WordPress) the admin panel can be easily accessed by typing _[host]/admin_. 
 #### /config
 This folder includes two files that are used to set some config options. More info below.
+#### /css
+Just some CSS goodies for the UI.
 #### /js
 This folder includes all .js files needed for the user interface to work.
 #### /utils
@@ -102,7 +104,13 @@ MySQL default is 3306.
 
 _The admin panel is in very early stage of the development. Many things might be broken._
 
-Coming soon...
+### Admin panel allows you to...
+* See all user accounts
+
+More to be added in the future.
+
+### How do I access it?
+_/admin_
 
 ## General FAQ
 ### How do I turn on the debug mode?
@@ -117,7 +125,7 @@ That error message means that `PDOException` occured while trying to connect to 
 3. PHP's PDO interface or `PDO_MYSQL` driver is not available or configured properly.  
  Try updating to the latest version of PHP if possible. Make sure you or your host enable `PDO_MYSQL`.
 4. Your host's firewall is blocking the connection.  
- Make sure that your or your host's firewall is not blocking the connection to the $port.  
+ Make sure that your or your host's firewall is not blocking the connection.  
 5. Something else.  
  Please open issue here on GitHub i and I try to figure it out.
  
