@@ -49,7 +49,7 @@ If you are also using front-end demo/sample I provide, then you can/must also ed
 #### Config options in config.php
 | Option name                  | Description                                                | Default value | Supported values |
 |------------------------------|------------------------------------------------------------|---------------|------------------|
-| $disableUserSelfRegistration | Prevent users from registering                             | false         | true, false      |
+| $disableUserSelfRegistration | Prevent users from registering                             | false         | Boolean          |
 | $usernameMinLength           | Shortest allowed username                                  | 3             | 1 ->             |
 | $usernameMaxLength           | Longest allowed username                                   | 30            | 1 ->             |
 | $passwordMinLength           | Minimum length of passwords                                | 8             | 1 ->             |
@@ -59,6 +59,9 @@ If you are also using front-end demo/sample I provide, then you can/must also ed
 | $debugMode                   | Allows you to disable dabase connection (for testing only) | "no"          | "no"             |
 | $debugAdminUsername          | Allows you to log in while in debug mode                   | "admin"       | any string       |
 | $debugAdminPassword          | Allows you to log in while in debug mode                   | ""            | any string       |
+| $dateSeperator               | The seperator between numbers in dates. (eg. "/" or ".")   | "."           | any string       |
+| $timeSeperator               | The seperator between numbers in times.                    | ":"           | any string       |
+| $mmddyyyy                    | Save dates in MMDDYYYY format instead of DDMMYYYY          | false         | Boolean          |
 
 
 #### Config options in config.js
@@ -77,7 +80,7 @@ As stated earlier, you need MySQL database. The database requires very little sp
 
 ### Setting up the database
 0. Have a MySQL database that you have access to.
-1. Create table `users` with at least three colums: `username` , `password` and `accessLevel`. I would also add auto incrementing id field but that is not strictly required.
+1. Create table `users` with four colums: `username` , `password` , `accessLevel` and `lastLogin`. Use a string data type like CHAR. I personally like to use VARCHAR. I would also add auto incrementing id field but that is not strictly required.
 2. Insert your database hostname, port, name and credentials into **/utils/databaseConnect.php**. I recommend creating dedicated account with restricted permissions.
 
 ### FAQ
@@ -93,7 +96,8 @@ CREATE TABLE users (
  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
  username VARCHAR(64) NOT NULL UNIQUE,
  password VARCHAR(255) NOT NULL,
- accessLevel VARCHAR(10) NOT NULL
+ accessLevel VARCHAR(10) NOT NULL,
+ lastLogin VARCHAR(16)
 );
 ````
 
@@ -105,7 +109,7 @@ MySQL default is 3306.
 _The admin panel is in very early stage of the development. Many things might be broken._
 
 ### Admin panel allows you to...
-* See all user accounts
+* See all user accounts, their access level and last login time
 
 More to be added in the future.
 
@@ -130,3 +134,7 @@ That error message means that `PDOException` occured while trying to connect to 
  Please open issue here on GitHub i and I try to figure it out.
  
  I'm planning to introduce more verbose error messages sometime in the future to help with the situations like this.
+
+### Dates and/or are wrong!
+Notice that on default settings the dates are saved in European format. (Day before month) You can change that behavior with a config option in **config.php**.
+Also, the saved time is the **server's time, not your/user computer's**. If your host is in different time zone than you then the the times will be offset. I'm planning to add $timeOffset config option to help with this problem.
