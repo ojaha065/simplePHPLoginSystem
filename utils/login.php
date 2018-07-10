@@ -48,6 +48,15 @@
         $result = $result["password"];
 
         if(passwordIsCorrect($password,$result)){
+            $currentTime = date("dmYhia");
+            if($mmddyyyy){
+                $currentTime = date("mdYhia"); // You silly Americans...
+            }
+            $query = $connection->prepare("UPDATE users SET lastLogin = :lastLogin WHERE BINARY username = :username");
+            $query->bindParam(":lastLogin",$currentTime);
+            $query->bindParam(":username",$username);
+            $query->execute();
+
             session_start();
             $_SESSION["username"] = $username;
             header("location: ../index.php");

@@ -21,6 +21,9 @@
             $query = $connection->prepare("SELECT accessLevel FROM users ORDER BY AccessLevel");
             $query->execute();
             $accessLevels = $query->fetchAll();
+            $query = $connection->prepare("SELECT lastLogin FROM users ORDER BY AccessLevel");
+            $query->execute();
+            $lastLogins = $query->fetchAll();
         }
     }
     else{
@@ -64,11 +67,24 @@
                                 if($usernames[$i][0] == $_SESSION["username"]){
                                     $extraInfo = " <i>(Current account)</i>";
                                 }
+                                $string = $lastLogins[$i][0];
+                                if($string == ""){
+                                    $lastLogin = "<i>Never</i>";
+                                }
+                                else{
+                                    $lastLogin = substr($string,0,2);
+                                    $lastLogin .= $dateSeperator . substr($string,2,2);
+                                    $lastLogin .= $dateSeperator . substr($string,4,4);
+                                    $lastLogin .= " at " . substr($string,8,2);
+                                    $lastLogin .= $timeSeperator . substr($string,10,2);
+                                    $lastLogin .= " " . substr($string,12,2);
+                                }
+             
                                 echo "<tr>
                                     <td>",$usernames[$i][0],$extraInfo,"</td>
                                     <td><i>Set</i>
                                     <td>",$accessLevels[$i][0],"</td>
-                                    <td>TODO</td>
+                                    <td>",$lastLogin,"</td>
                                     <td class='actions'></td>"; // The buttons don't do anything yet.
                             }
                         }

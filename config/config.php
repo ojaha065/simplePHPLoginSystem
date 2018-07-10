@@ -30,4 +30,13 @@
     $debugMode = "no";
     $debugAdminUsername = "admin";
     $debugAdminPassword = "";
+
+    // Date and time settings
+    // Default settings saves dates in European format: 23.06.2018
+    // If you live in some silly country that uses MM/DD/YYYY then change $mmddyyyy to 'true'.
+    // Seperators can be almost anything.
+    $dateSeperator = ".";
+    $timeSeperator = ":";
+    $mmddyyyy = false;
+
 ?>
