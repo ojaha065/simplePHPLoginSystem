@@ -24,6 +24,7 @@
     $newAccountAccessLevel = "user";
 
     // Turning the debug mode ON disables database connection and only allows logging in with the username and password below.
+    // Registering new accounts in debug mode is not allowed.
     // Using this in the production environment is a huge security risk. Don't do it, ever!
     // If you are sure you want to turn the debug mode ON, change $debugMode to 'IKnowWhatIAmDoing'.
     $debugMode = "no";

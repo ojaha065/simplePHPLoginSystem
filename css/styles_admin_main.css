@@ -1,0 +1,13 @@
+/*
+    Simple PHP registration and login system
+    https://github.com/ojaha065/simplePHPLoginSystem
+    (C) Jani Haiko, 2018
+*/
+
+.fa{
+    margin-left: 5px;
+    cursor: pointer;
+}
+.fa:first-of-type{
+    margin-left: unset;
+}
