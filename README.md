@@ -23,6 +23,8 @@ The admin panel will be here. Similarly to many other web applications (like Wor
 This folder includes two files that are used to set some config options. More info below.
 #### /css
 Just some CSS goodies for the UI.
+#### /install
+The automatic installer (very WIP) resides here.
 #### /js
 This folder includes all .js files needed for the user interface to work.
 #### /utils
@@ -78,21 +80,14 @@ If you are also using the front-end user interface I provide, then you can/must 
 
 As stated earlier, you need MySQL database. The database requires very little space and any fairly recent version of MySQl should work.
 
-### Setting up the database
+### Setting up the database manually
 0. Have a MySQL database that you have access to.
 1. Create table `users` with four colums: `username` , `password` , `accessLevel` and `lastLogin`. Use a string data type like CHAR. I personally like to use VARCHAR. I would also add auto incrementing id field but that is not strictly required.
 2. Insert your database hostname, port, name and credentials into **/utils/databaseConnect.php**. I recommend creating dedicated account with restricted permissions.
 
-### FAQ
-#### Why don't you have a automatic wizard for inserting database info and doing all this SQL stuff?
-I'm planning to create something like that sometime in near future. Stay posted.
-
-#### I have a database but don't what any of that jargon about tables and colums mean. Help?
-Don't know your SQL? Don't worry, just wait a little while. I'm planning to create a automatic wizard that can do most of this stuff for you.
-
-If you are able to run SQL queries inside you database (it's easy to do in phpMyAdmin, for example) then something like this should get you covered:
+#### Don't know your SQL?
 ````SQL
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
  username VARCHAR(64) NOT NULL UNIQUE,
  password VARCHAR(255) NOT NULL,
@@ -100,6 +95,15 @@ CREATE TABLE users (
  lastLogin VARCHAR(16)
 );
 ````
+
+### FAQ
+#### Why don't you have a automatic wizard for inserting database info and doing all this SQL stuff?
+I'm planning to create something like that sometime in near future. Stay posted.
+
+#### I have a database but don't what any of that jargon about tables and colums mean. Help?
+~~Don't know your SQL? Don't worry, just wait a little while. I'm planning to create a automatic wizard that can do most of this stuff for you.~~ After inserting your database info into **/utils/databaseConnect.php** navigate to **/install/createTable.php**. That should create needed table for you.
+##### createTable.php just redirects me to the login page!
+Something went wrong when trying to connect you your database. Double check the your database hostname, port, name and credentials and check the general FAQ below for more help.
 
 #### I don't know what port my database is using.
 MySQL default is 3306.
