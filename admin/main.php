@@ -65,6 +65,23 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="confirmDeletionModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Are you sure?</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete account <span id="confirmDeletionModalUsername"></span> from the system?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                            <button type="button" id="confirmDeletionButton" class="btn btn-danger" data-dismiss="modal">Yes, I'm sure</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <table class="table table-striped table-bordered table-hover table-responsive-sm">
                 <thead class="thead-light">

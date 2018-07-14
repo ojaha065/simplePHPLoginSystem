@@ -28,8 +28,7 @@
         if($result == NULL){
             echo "Error: Invalid username"; // This should never happen
         }
-
-        if($result[0] === "admin"){
+        elseif($result[0] === "admin"){
             $_SESSION["accessLevel"] = "admin";
             header("location: main.php");
         }
