@@ -48,11 +48,13 @@ $(document).ready(function(){
 
     $("form").submit(function(e){
         e.preventDefault();
+        $("button").prop("disabled",true).html("Please wait...");
         if($("#password").val() === $("#passwordAgain").val()){
             this.submit();
         }
         else{
             $("#errorArea").html("Passwords do not match.");
+            $("button").prop("disabled",false).html("Submit");
         }
     });
 });

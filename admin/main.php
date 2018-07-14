@@ -49,6 +49,23 @@
     </head>
     <body>
         <div class="container">
+            <div class="modal fade" id="errorModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="errorModalTitle"></h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="errorModalMessage"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <table class="table table-striped table-bordered table-hover table-responsive-sm">
                 <thead class="thead-light">
                     <tr>
@@ -85,7 +102,8 @@
                                     <td><i>Set</i>
                                     <td>",$accessLevels[$i][0],"</td>
                                     <td>",$lastLogin,"</td>
-                                    <td class='actions'></td>"; // The buttons don't do anything yet.
+                                    <td class='actions'></td>
+                                    <td class='d-none'>",$usernames[$i][0],"</td></tr>";
                             }
                         }
                         else{

@@ -23,6 +23,7 @@
     catch(PDOException $e){
         session_start();
         unset($_SESSION["username"]);
+        unset($_SESSION["accessLevel"]);
         session_destroy();
         header("location: ../login.php?returnCode=connectionError");
         die();

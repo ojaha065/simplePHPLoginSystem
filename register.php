@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <input class="form-control" type="password" id="password" name="password" minlength="8" maxlength="255" required />
+                    <input class="form-control" type="password" id="password" name="password" minlength="8" required />
                     <label for="passwordAgain">Re-enter password:</label>
                     <input class="form-control" type="password" id="passwordAgain" required />
                 </div>
