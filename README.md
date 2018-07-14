@@ -42,9 +42,9 @@ My take on creating a simple registration form with Bootstrap. Feel free to modi
 
 _Please note that config options are subject to change. Check back often._
 
-If you checked the /config folder, you probably noticed that there is two different files there. What gives? The main configuration file is **config.php**. It includes settings that are enforced on server level. You should be mainly editing this file.
+If you checked the /config folder, you probably noticed that there is two different files there. What gives? The main configuration file is **config.php**. It includes settings that are enforced on the server level. You should be mainly editing this file.
 
-If you are also using front-end demo/sample I provide, then you can/must also edit **config.js** There you can manage how things look for the avarage user. **Please remember that these settings are client-side only and _not_ enforced in any way so they can be edited by users.**
+If you are also using the front-end user interface I provide, then you can/must also edit **config.js** There you can manage how things look for the avarage user. **Please remember that these settings are client-side only and _not_ enforced in any way so they can be edited by users.**
 
 #### Config options in config.php
 | Option name                  | Description                                                | Default value | Supported values |
@@ -110,6 +110,7 @@ _The admin panel is in very early stage of the development. Many things might be
 
 ### Admin panel allows you to...
 * See all user accounts, their access level and last login time
+* Delete user accounts
 
 More to be added in the future.
 
