@@ -7,12 +7,15 @@
 
     session_start();
 
-    if(!isset($_SESSION["username"]) || !isset($_SESSION["accessLevel"])){
-        header("location: ../login.php");
+    if(!isset($_SESSION["username"]) || !isset($_SESSION["accessLevel"]) || time() - $_SESSION["lastActivity"] > 450){
+        session_unset();
+        session_destroy();
+        header("location: ../login.php?returnCode=timeout");
         die();
     }
     elseif($_SESSION["accessLevel"] === "admin"){
         require_once "../config/config.php";
+        $_SESSION["lastActivity"] = time();
         if($debugMode !== "IKnowWhatIAmDoing"){
             require_once "../utils/databaseConnect.php";
             $query = $connection->prepare("SELECT username FROM users ORDER BY AccessLevel");

@@ -65,6 +65,9 @@ function removeAccount(username){
                 $("#errorModalMessage").html("You cannot delete the account you are currently using.");
                 $("#errorModal").modal("show");
             }
+            else if(result == "timeout"){
+                location.href = "../login.php?returnCode=timeout";
+            }
             else if(result == "valuesNotSet"){
                 $("#errorModalTitle").html("Error");
                 $("#errorModalMessage").html("Error: valuesNotSet");
@@ -98,6 +101,7 @@ function modifyAccount(username,accessLevel,reset){
                     $("#errorModalMessage").html("There was security problem and that action is not permited right now.");
                     $("#errorModal").modal("show");
                     break;
+                case "timeout": location.href = "../login.php?returnCode=timeout";
                 case "valuesNotSet":
                     $("#errorModalTitle").html("Error");
                     $("#errorModalMessage").html("Error: valuesNotSet");

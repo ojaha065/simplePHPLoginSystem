@@ -17,6 +17,7 @@
             if($username === $debugAdminUsername && $password === $debugAdminPassword){
                 session_start();
                 $_SESSION["username"] = $username;
+                $_SESSION["lastActivity"] = time();
                 $_SESSION["accessLevel"] = "admin";
                 header("location: ../index.php");
                 die();
@@ -36,7 +37,7 @@
         $username = $_POST["username"];
         $password = $_POST["password"];
 
-        $query = $connection->prepare("SELECT password FROM users WHERE username = BINARY :username"); // Binary == Huomioi kirjainkoko
+        $query = $connection->prepare("SELECT password FROM users WHERE username = BINARY :username");
         $query->bindParam(":username",$username);
         $query->execute();
         $result = $query->fetch();
@@ -59,6 +60,7 @@
 
             session_start();
             $_SESSION["username"] = $username;
+            $_SESSION["lastActivity"] = time();
             header("location: ../index.php");
         }
         else{

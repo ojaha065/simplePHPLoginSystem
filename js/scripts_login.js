@@ -20,6 +20,10 @@ $(document).ready(function(){
             $(".alert").addClass("alert-danger");
             $("#alertMessage").html("Your username or password was incorrect.");
             break;
+        case "timeout":
+            $(".alert").addClass("alert-info");
+            $("#alertMessage").html("You were logged out due to inactivity. Please log in again.");
+            break;
         case "connectionError":
             $(".alert").addClass("alert-danger");
             $("#alertMessage").html("Connection error occured. Try again later.");

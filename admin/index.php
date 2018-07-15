@@ -30,6 +30,7 @@
         }
         elseif($result[0] === "admin"){
             $_SESSION["accessLevel"] = "admin";
+            $_SESSION["lastActivity"] = time();
             header("location: main.php");
         }
         else{

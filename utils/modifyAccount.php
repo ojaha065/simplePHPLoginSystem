@@ -14,6 +14,16 @@
         die();
     }
 
+    if(time() - $_SESSION["lastActivity"] > 450){
+        session_unset();
+        session_destroy();
+        echo "timeout";
+        die();
+    }
+    else{
+        $_SESSION["lastActivity"] = time();
+    }
+
     require_once "databaseConnect.php";
 
     if(isset($_POST["username"]) && isset($_POST["accessLevel"]) && isset($_POST["reset"])){
