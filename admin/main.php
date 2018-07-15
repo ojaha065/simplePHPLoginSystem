@@ -49,6 +49,7 @@
     </head>
     <body>
         <div class="container">
+            <!-- Modals -->
             <div class="modal fade" id="errorModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -78,6 +79,48 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                             <button type="button" id="confirmDeletionButton" class="btn btn-danger" data-dismiss="modal">Yes, I'm sure</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modifyModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modify user</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="modify_username">Username</label>
+                                    <input type="text" class="form-control" id="modify_username" readonly />
+                                </div>
+                                <div class="form-group">
+                                    <label for="modify_password">Password</label>
+                                    <input type="text" class="form-control" id="modify_password" value="SET" readonly />
+                                    <small>You can only edit your own password!</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="modify_accessLevel">AccessLevel</label>
+                                    <select class="form-control" id="modify_accessLevel" required>
+                                        <option value="admin">Admin</option>
+                                        <option value="user">User</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="modify_lastLogin">LastLogin</label>
+                                    <input type="text" class="form-control" id="modify_lastLogin" readonly />
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="modify_reset" />
+                                        <label class="form-check-label" for="modify_reset">Reset</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard changes</button>
+                            <button type="button" id="saveChangesButton" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
@@ -117,8 +160,8 @@
                                 echo "<tr>
                                     <td>",$usernames[$i][0],$extraInfo,"</td>
                                     <td><i>Set</i>
-                                    <td>",$accessLevels[$i][0],"</td>
-                                    <td>",$lastLogin,"</td>
+                                    <td class='accessLevel'>",$accessLevels[$i][0],"</td>
+                                    <td class='lastLogin'>",$lastLogin,"</td>
                                     <td class='actions'></td>
                                     <td class='d-none'>",$usernames[$i][0],"</td></tr>";
                             }

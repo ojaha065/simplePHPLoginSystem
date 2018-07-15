@@ -17,10 +17,30 @@ $(document).ready(function(){
         $("#confirmDeletionModalUsername").html(username);
         $("#confirmDeletionModal").modal("show");
     });
+    $(".fa-cog").click(function(){
+        var username = $(this).parent().siblings(".d-none").html();
+        var accessLevel = $(this).parent().siblings(".accessLevel").html();
+        var lastLogin = $(this).parent().siblings(".lastLogin").html();
+        $("#modify_username").val(username);
+        $("#modify_accessLevel").val(accessLevel);
+        $("#modify_lastLogin").val(lastLogin);
+        $("#modifyModal").modal("show");
+    });
 
     $("#confirmDeletionButton").click(function(){
         var username = $("#confirmDeletionModalUsername").html();
         removeAccount(username);
+    });
+    $("#saveChangesButton").click(function(){
+        $("#saveChangesButton").prop("disabled",true);
+        $("#saveChangesButton").html("Please wait...");
+        var username = $("#modify_username").val();
+        var accessLevel = $("#modify_accessLevel").val();
+        var reset = false;
+        if($("#modify_reset").prop("checked")){
+            reset = true;
+        }
+        modifyAccount(username,accessLevel,reset);
     });
 });
 
@@ -56,10 +76,45 @@ function removeAccount(username){
                 $("#errorModal").modal("show");
             }
         },
-        error: function(error){
-            $("#errorModalTitle").html("Error");
-            $("#errorModalMessage").html("Error " + error.status + ": " + error.statusText);
-            $("#errorModal").modal("show");
-        }
+        error: showAjaxError
     });
+}
+
+function modifyAccount(username,accessLevel,reset){
+    $.ajax({
+        method: "POST",
+        url: "../utils/modifyAccount.php",
+        data: {
+            username: username,
+            accessLevel: accessLevel,
+            reset: reset
+        },
+        success: function(result){
+            $("#modifyModal").modal("hide");
+            switch(result){
+                case "accountModified": location.reload();
+                case "securityError":
+                    $("#errorModalTitle").html("Security error");
+                    $("#errorModalMessage").html("There was security problem and that action is not permited right now.");
+                    $("#errorModal").modal("show");
+                    break;
+                case "valuesNotSet":
+                    $("#errorModalTitle").html("Error");
+                    $("#errorModalMessage").html("Error: valuesNotSet");
+                    $("#errorModal").modal("show");
+                    break;
+                default:
+                    $("#errorModalTitle").html("Error");
+                    $("#errorModalMessage").html("Error: " + result);
+                    $("#errorModal").modal("show");
+            }
+        },
+        error: showAjaxError
+    });
+}
+
+function showAjaxError(error){
+    $("#errorModalTitle").html("Error");
+    $("#errorModalMessage").html("Error " + error.status + ": " + error.statusText);
+    $("#errorModal").modal("show");
 }
