@@ -58,12 +58,14 @@ If you are also using the front-end user interface I provide, then you can/must 
 | $usernameRegExp              | All usernames must match this regular expression           |               | any regExp       |
 | $passwordRegExp              | All usernames must match this regular expression           |               | any regExp       |
 | $newAccountAccessLevel       | Useful for creating your first admin account               | "user"        | "user", "admin"  |
-| $debugMode                   | Allows you to disable dabase connection (for testing only) | "no"          | "no"             |
+| $debugMode                   | Allows you to disable dabase connection (for debuging only)| "no"          | "no"             |
 | $debugAdminUsername          | Allows you to log in while in debug mode                   | "admin"       | any string       |
 | $debugAdminPassword          | Allows you to log in while in debug mode                   | ""            | any string       |
 | $dateSeperator               | The seperator between numbers in dates. (eg. "/" or ".")   | "."           | any string       |
 | $timeSeperator               | The seperator between numbers in times.                    | ":"           | any string       |
 | $mmddyyyy                    | Save dates in MMDDYYYY format instead of DDMMYYYY          | false         | Boolean          |
+| $timeout                     | Time of inactivity (in seconds) required to log user out   | 900           | any integer      |
+| $adminPanelTimeout           | Time of inactivity required to log user out from adminpanel| 450           | any integer     |
 
 
 #### Config options in config.js
@@ -114,6 +116,7 @@ _The admin panel is in very early stage of the development. Many things might be
 
 ### Admin panel allows you to...
 * See all user accounts, their access level and last login time
+* Modify user's access level and reset their last login time
 * Delete user accounts
 
 More to be added in the future.
