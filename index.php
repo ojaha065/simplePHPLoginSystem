@@ -3,7 +3,7 @@
 
     session_start();
 
-    if(!isset($_SESSION["username"]) || time() - $_SESSION["lastActivity"] > 900){
+    if(!isset($_SESSION["username"]) || time() - $_SESSION["lastActivity"] > $timeout){
         session_unset();
         session_destroy();
         header("location: login.php?returnCode=timeout");

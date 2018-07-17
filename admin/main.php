@@ -5,9 +5,10 @@
         (C) Jani Haiko, 2018
     */
 
+    require_once "../config/config.php";
     session_start();
 
-    if(!isset($_SESSION["username"]) || !isset($_SESSION["accessLevel"]) || time() - $_SESSION["lastActivity"] > 450){
+    if(!isset($_SESSION["username"]) || !isset($_SESSION["accessLevel"]) || time() - $_SESSION["lastActivity"] > $adminPanelTimeout){
         session_unset();
         session_destroy();
         header("location: ../login.php?returnCode=timeout");

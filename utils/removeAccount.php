@@ -13,7 +13,7 @@
         returnWithError("securityError");
         die();
     }
-    if(time() - $_SESSION["lastActivity"] > 450){
+    if(time() - $_SESSION["lastActivity"] > $adminPanelTimeout){
         session_unset();
         session_destroy();
         echo "timeout";
