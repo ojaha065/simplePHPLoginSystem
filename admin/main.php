@@ -8,7 +8,13 @@
     require_once "../config/config.php";
     session_start();
 
-    if(!isset($_SESSION["username"]) || !isset($_SESSION["accessLevel"]) || time() - $_SESSION["lastActivity"] > $adminPanelTimeout){
+    if(!isset($_SESSION["username"]) || !isset($_SESSION["accessLevel"])){
+        session_unset();
+        session_destroy();
+        header("location: ../login.php");
+        die();
+    }
+    if(!isset($_SESSION["lastActivity"]) || time() - $_SESSION["lastActivity"] > $adminPanelTimeout){
         session_unset();
         session_destroy();
         header("location: ../login.php?returnCode=timeout");

@@ -32,10 +32,13 @@
     }
 
     require_once "databaseConnect.php";
+    session_start();
 
     if(isset($_POST["username"]) && isset($_POST["password"])){
         $username = $_POST["username"];
         $password = $_POST["password"];
+
+        $_SESSION["inputedUsername"] = $username;
 
         $query = $connection->prepare("SELECT password FROM users WHERE username = BINARY :username");
         $query->bindParam(":username",$username);
@@ -58,7 +61,6 @@
             $query->bindParam(":username",$username);
             $query->execute();
 
-            session_start();
             $_SESSION["username"] = $username;
             $_SESSION["lastActivity"] = time();
             header("location: ../index.php");

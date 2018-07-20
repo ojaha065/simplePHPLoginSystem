@@ -4,6 +4,15 @@
     if(isset($_SESSION["username"])){
         header("location: index.php");
     }
+
+    function getUsername(){
+        if(isset($_SESSION["inputedUsername"])){
+            return htmlspecialchars($_SESSION["inputedUsername"]);
+        }
+        else{
+            return "";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +44,7 @@
             <form method="POST" action="utils/login.php">
                 <div class="form-group">
                     <label for="username">Username:</label>
-                    <input class="form-control" type="text" id="username" name="username" required />
+                    <input class="form-control" type="text" id="username" name="username" value='<?php echo getUsername();?>' required />
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
