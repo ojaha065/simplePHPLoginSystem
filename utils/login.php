@@ -8,14 +8,16 @@
     echo "If you are reading this, then the login process is taking longer than excepted...";
 
     require_once "../config/config.php";
+    session_start();
 
     if($debugMode === "IKnowWhatIAmDoing"){
         if(isset($_POST["username"]) && isset($_POST["password"])){
             $username = $_POST["username"];
             $password = $_POST["password"];
+
+            $_SESSION["inputedUsername"] = $username;
             
             if($username === $debugAdminUsername && $password === $debugAdminPassword){
-                session_start();
                 $_SESSION["username"] = $username;
                 $_SESSION["lastActivity"] = time();
                 $_SESSION["accessLevel"] = "admin";
@@ -32,7 +34,6 @@
     }
 
     require_once "databaseConnect.php";
-    session_start();
 
     if(isset($_POST["username"]) && isset($_POST["password"])){
         $username = $_POST["username"];
