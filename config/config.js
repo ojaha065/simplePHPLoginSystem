@@ -28,3 +28,5 @@ var passwordRules = "<ol>"
     +"<ul><li>Language special characters (like Å, Ä, Ö) are allowed but they do not count towards this.</li></ul>"
     +"<li>Password must contain at least one number</li>"
 +"</ol";
+
+var enableUsernameSuggestions = true;

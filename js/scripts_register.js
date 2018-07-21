@@ -46,6 +46,40 @@ $(document).ready(function(){
     });
     $("#password").attr("minlength",passwordMinLength);
 
+    if(enableUsernameSuggestions){
+        var showUsernameTipsTimer;
+        $("#username").one("focus",function(){
+            showUsernameTipsTimer = setTimeout(function(){
+                var wordlist = [];
+                $.ajax({
+                    url: "wordlist.txt",
+                    success: function(result){
+                        wordlist = result.split(/\r?\n/g);
+                        while(true){
+                            var usernameSuggestion = wordlist[randomNumberBetween(0,wordlist.length - 1)];
+                            if(usernameSuggestion.length >= usernameMinLength){
+                                break;
+                            }
+                        }
+                        $("#usernameSuggestion").html(usernameSuggestion).parent().show();
+                    },
+                    error: function(error){
+                        console.error(error.status + ": " + error.statusText);
+                    }
+                });
+            },5000);
+        });
+        $("#usernameSuggestion").click(function(){
+            $("#username").val($(this).html());
+        });
+        $("#username").blur(function(){
+            clearTimeout(showUsernameTipsTimer);
+            setTimeout(function(){
+                $("#usernameSuggestion").parent().hide();
+            },100);
+        });
+    }
+
     $("form").submit(function(e){
         e.preventDefault();
         $("button").prop("disabled",true).html("Please wait...");

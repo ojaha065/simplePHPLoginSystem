@@ -1,0 +1,11 @@
+/*
+    Simple PHP registration and login system
+    https://github.com/ojaha065/simplePHPLoginSystem
+    (C) Jani Haiko, 2018
+*/
+
+#usernameSuggestion{
+    cursor: pointer;
+    text-decoration: underline;
+    color: blue;
+}

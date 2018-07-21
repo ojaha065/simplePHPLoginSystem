@@ -27,6 +27,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no" />
         <title>Register an account</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="css/styles_register.css" type="text/css" media="all" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="utils/scripts.js"></script>
@@ -41,6 +42,7 @@
                 <div class="form-group">
                     <label for="username">Username:</label>
                     <input class="form-control" type="text" id="username" name="username" value='<?php echo getUsername();?>' required />
+                    <small style="display: none;">Can't think of anything? How about <b id="usernameSuggestion"></b>?</small>
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
