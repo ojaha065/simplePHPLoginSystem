@@ -39,6 +39,8 @@ This file is here just for the demo. The users can only see the page if they are
 My take on creating a simple login form with Bootstrap. Feel free to modify it to fit your needs.
 #### register.php
 My take on creating a simple registration form with Bootstrap. Feel free to modify it to fit your needs.
+#### wordlist.txt
+This is the list of 1000 most common English words. It's used by username suggestor. You can replace the list with your own .txt file. Every word on the list needs to be followed by line break.
 
 ### Config options
 
@@ -77,6 +79,7 @@ If you are also using the front-end user interface I provide, then you can/must 
 | passwordMinLength           | Shortest password that UI accepts                           | 8             | 1 ->             |
 | usernameRules               | This string is shown if username didn't match the regExp    |               | any string       |
 | passwordRules               | This string is shown if password didn't match the regExp    |               | any string       |
+| enableUsernameSuggestions   | Allows you to disable or enable username suggestions        | true          | Boolean          |
 
 ## Database
 
