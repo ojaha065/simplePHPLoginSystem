@@ -21,7 +21,6 @@
         die();
     }
     elseif($_SESSION["accessLevel"] === "admin"){
-        require_once "../config/config.php";
         $_SESSION["lastActivity"] = time();
         if($debugMode !== "IKnowWhatIAmDoing"){
             require_once "../utils/databaseConnect.php";
