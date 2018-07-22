@@ -12,6 +12,7 @@ This project started as a simple school assignment for some PHP course I was att
 * It requires MySQL database. More info about setting up your database below.
 * I'm using the PDO interface. You also need PDO_MYSQL driver installed.
 * I have only tested it in PHP 7.0 and above but it should work all the way down to 5.5.0.
+* Users can change their ~~username~~ (planned) and password.
 
 ## File structure
 
@@ -33,6 +34,8 @@ This folder includes the backbone of the system. It has .php files for connectin
 You should read this before using this. It's just a normal MIT license tho.
 #### README.md
 This file.
+#### account.php
+This is the account management page. Users can change their password here.
 #### index.php
 This file is here just for the demo. The users can only see the page if they are logged in. Otherwise they are redirected to the login page.
 #### login.php
@@ -90,7 +93,18 @@ As stated earlier, you need MySQL database. The database requires very little sp
 1. Create table `users` with four colums: `username` , `password` , `accessLevel` and `lastLogin`. Use a string data type like CHAR. I personally like to use VARCHAR. I would also add auto incrementing id field but that is not strictly required.
 2. Insert your database hostname, port, name and credentials into **/utils/databaseConnect.php**. I recommend creating dedicated account with restricted permissions.
 
+#### Field lengths
+If you are using VARCHAR or other data type with varying maximum string length, then the table below will be useful.
+
+| Field       | Required length (minimum)                                                        |
+|-------------|----------------------------------------------------------------------------------|
+| username    | Same as $usernameMaxLength in config.php                                         |
+| password    | I recommend using 255 to be safe (As PHP's default crypting method might change) |
+| accessLevel | 5                                                                                |
+| lastLogin   | 16                                                                               |
+
 #### Don't know your SQL?
+Don't worry, something like this should get you covered:
 ````SQL
 CREATE TABLE IF NOT EXISTS users (
  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
