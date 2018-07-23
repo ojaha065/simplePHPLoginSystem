@@ -54,23 +54,24 @@ If you checked the /config folder, you probably noticed that there is two differ
 If you are also using the front-end user interface I provide, then you can/must also edit **config.js** There you can manage how things look for the avarage user. **Please remember that these settings are client-side only and _not_ enforced in any way so they can be edited by users.**
 
 #### Config options in config.php
-| Option name                  | Description                                                | Default value | Supported values |
-|------------------------------|------------------------------------------------------------|---------------|------------------|
-| $disableUserSelfRegistration | Prevent users from registering                             | false         | Boolean          |
-| $usernameMinLength           | Shortest allowed username                                  | 3             | 1 ->             |
-| $usernameMaxLength           | Longest allowed username                                   | 30            | 1 ->             |
-| $passwordMinLength           | Minimum length of passwords                                | 8             | 1 ->             |
-| $usernameRegExp              | All usernames must match this regular expression           |               | any regExp       |
-| $passwordRegExp              | All usernames must match this regular expression           |               | any regExp       |
-| $newAccountAccessLevel       | Useful for creating your first admin account               | "user"        | "user", "admin"  |
-| $debugMode                   | Allows you to disable dabase connection (for debuging only)| "no"          | "no"             |
-| $debugAdminUsername          | Allows you to log in while in debug mode                   | "admin"       | any string       |
-| $debugAdminPassword          | Allows you to log in while in debug mode                   | ""            | any string       |
-| $dateSeperator               | The seperator between numbers in dates. (eg. "/" or ".")   | "."           | any string       |
-| $timeSeperator               | The seperator between numbers in times.                    | ":"           | any string       |
-| $mmddyyyy                    | Save dates in MMDDYYYY format instead of DDMMYYYY          | false         | Boolean          |
-| $timeout                     | Time of inactivity (in seconds) required to log user out   | 900           | any integer      |
-| $adminPanelTimeout           | Time of inactivity required to log user out from adminpanel| 450           | any integer     |
+| Option name                  | Description                                                | Default value| Supported values  |
+|------------------------------|------------------------------------------------------------|--------------|-------------------|
+| $disableUserSelfRegistration | Prevent users from registering                             | false        | Boolean           |
+| $usernameMinLength           | Shortest allowed username                                  | 3            | 1 ->              |
+| $usernameMaxLength           | Longest allowed username                                   | 30           | 1 ->              |
+| $passwordMinLength           | Minimum length of passwords                                | 8            | 1 ->              |
+| $usernameRegExp              | All usernames must match this regular expression           |              | any regExp        |
+| $passwordRegExp              | All usernames must match this regular expression           |              | any regExp        |
+| $newAccountAccessLevel       | Useful for creating your first admin account               | "user"       | "user", "admin"   |
+| $debugMode                   | Allows you to disable dabase connection (for debuging only)| "no"         | "no"              |
+| $debugAdminUsername          | Allows you to log in while in debug mode                   | "admin"      | any string        |
+| $debugAdminPassword          | Allows you to log in while in debug mode                   | ""           | any string        |
+| $dateSeperator               | The seperator between numbers in dates. (eg. "/" or ".")   | "."          | any string        |
+| $timeSeperator               | The seperator between numbers in times.                    | ":"          | any string        |
+| $mmddyyyy                    | Save dates in MMDDYYYY format instead of DDMMYYYY          | false        | Boolean           |
+| $timeout                     | Time of inactivity (in seconds) required to log user out   | 900          | any integer       |
+| $adminPanelTimeout           | Time of inactivity required to log user out from adminpanel| 450          | any integer       |
+| $errorMessages               | Show more verbose error messages.Might leak sensitive info!| default      |"default","verbose"|
 
 
 #### Config options in config.js
@@ -84,7 +85,7 @@ If you are also using the front-end user interface I provide, then you can/must 
 | passwordRules               | This string is shown if password didn't match the regExp    |               | any string       |
 | enableUsernameSuggestions   | Allows you to disable or enable username suggestions        | true          | Boolean          |
 
-## Database
+## Setup
 
 As stated earlier, you need MySQL database. The database requires very little space and any fairly recent version of MySQl should work.
 
@@ -115,6 +116,16 @@ CREATE TABLE IF NOT EXISTS users (
 );
 ````
 
+### Creating the first account
+After setting up the database, you'll need to create your first user account with admin rights. There's two ways to do that:
+* Navigate to **/install/createAdmin.php**. That will create a new account with admin rights using username ````admin```` and random password. (If you followed my SQL-sample above and set UNIQUE constraint to the username field, then the account won't be created if it already exists. You won't get error message) Log in to that account and change the password using the account management page.
+
+**OR**
+* If createAdmin.php does not work, you can also temporarily change ````$newAccountAccessLevel```` in **config/config.php** to "admin" and then create a new account using the normal registration form. Remember to change the value back to "user" afterwards.
+
+**IMPORTANT**
+I highly recommended that you delete the /install folder before using this in live production environment. Future version will do that automatically.
+
 ### FAQ
 #### Why don't you have a automatic wizard for inserting database info and doing all this SQL stuff?
 I'm planning to create something like that sometime in near future. Stay posted.
@@ -122,7 +133,7 @@ I'm planning to create something like that sometime in near future. Stay posted.
 #### I have a database but don't what any of that jargon about tables and colums mean. Help?
 ~~Don't know your SQL? Don't worry, just wait a little while. I'm planning to create a automatic wizard that can do most of this stuff for you.~~ After inserting your database info into **/utils/databaseConnect.php** navigate to **/install/createTable.php**. That should create needed table for you.
 ##### createTable.php just redirects me to the login page!
-Something went wrong when trying to connect you your database. Double check the your database hostname, port, name and credentials and check the general FAQ below for more help.
+Something went wrong when trying to connect you your database. Try turning more verbose error messages on in **/config/config.php**. Double check the your database hostname, port, name and credentials and check the general FAQ below for more help.
 
 #### I don't know what port my database is using.
 MySQL default is 3306.
@@ -146,7 +157,7 @@ _/admin_
 Read config.php more carefully.
 
 ### I'm getting 'Connection error occured' message and I'm sure that my I have entered my database info correctly into **/utils/databaseConnect.php**
-That error message means that `PDOException` occured while trying to connect to the database. The most common causes are:
+That error message means that `PDOException` occured while trying to connect to the database. You can turn more verbose error messages on in **/config/config.php**. The most common causes are:
 1. Wrong database hostname, port, name or credentials.  
  Double check them.
 2. The database is down.  
