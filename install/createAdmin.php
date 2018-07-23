@@ -14,10 +14,8 @@
     echo "The password of the created account will be: $randomPassword";
     $hashedPassword = password_hash($randomPassword,PASSWORD_DEFAULT);
 
-    $query = $connection->prepare("INSERT INTO users (username,password,accessLevel) VALUES (:username, :password, :accessLevel)");
-    $query->bindParam(":username","admin");
+    $query = $connection->prepare("INSERT INTO users (username,password,accessLevel) VALUES ('admin', :password, 'admin')");
     $query->bindParam(":password",$hashedPassword);
-    $query->bindParam(":accessLevel","admin");
     if(!$query){
         print_r($connection->errorInfo());
         die();

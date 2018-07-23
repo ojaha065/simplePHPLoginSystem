@@ -57,7 +57,7 @@
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
             <a id="selfRegistrationLink" href="register.php">Create account</a>
-            <small class="fixed-bottom">Version Alpha 0.4.1</small>
+            <small class="fixed-bottom">Version Alpha 0.4.2</small>
         </div>
     </body>
 </html>
