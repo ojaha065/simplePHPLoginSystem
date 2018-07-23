@@ -45,4 +45,8 @@
     $timeout = 900;
     $adminPanelTimeout = 450;
 
+    // Possible values: default, verbose
+    // This should always to be set to 'default' in production environment to prevent leaking any sensitive information via error messages.
+    $errorMessages = "default";
+
 ?>

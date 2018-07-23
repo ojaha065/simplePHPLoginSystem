@@ -5,6 +5,7 @@
         (C) Jani Haiko, 2018
     */
 
+    require_once "../config/config.php";
     require_once "../utils/databaseConnect.php";
 
     echo "Trying to create table...";

@@ -24,7 +24,12 @@
         session_start();
         session_unset();
         session_destroy();
-        header("location: ../login.php?returnCode=connectionError");
+        if($errorMessages === "verbose"){
+            echo $e;
+        }
+        else{
+            header("location: ../login.php?returnCode=connectionError");
+        }
         die();
     }
 ?>
