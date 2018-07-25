@@ -30,3 +30,7 @@ var passwordRules = "<ol>"
 +"</ol";
 
 var enableUsernameSuggestions = true;
+
+// This setting is client-side (browser) only.
+// Also use the similar setting in config.php if you want fully disallow username changes.
+var allowUsernameChange = true;

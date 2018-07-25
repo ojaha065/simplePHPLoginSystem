@@ -75,7 +75,9 @@
             <form>
                 <div class="form-group">
                     <label for="username">Username:</label>
-                    <input class="form-control" type="text" id="username" value='<?php echo $username; ?>' readonly required />
+                    <input class="form-control" type="text" id="username" value='<?php echo $username; ?>' required />
+                    <small id="usernameChangeDisallowedText" style="display: none;">You cannot change your username.</small>
+                    <input class="form-control" type="hidden" id="oldUsername" value='<?php echo $username; ?>' readonly disabled />
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="passwordCheckbox" />

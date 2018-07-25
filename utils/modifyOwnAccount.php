@@ -24,14 +24,17 @@
         $_SESSION["lastActivity"] = time();
     }
 
-    if(isset($_POST["oldPassword"]) && isset($_POST["newPassword"])){
+    if(isset($_POST["oldPassword"]) && isset($_POST["newPassword"]) && isset($_POST["newUsername"])){
         $username = $_SESSION["username"];
         $oldPassword = $_POST["oldPassword"];
         $newPassword = $_POST["newPassword"];
+        $newUsername = $_POST["newUsername"];
 
         require_once "databaseConnect.php";
 
-        if($newPassword != "noChange"){
+        $problems = false;
+
+        if($newPassword != -1){
             $query = $connection->prepare("SELECT password FROM users WHERE username = BINARY :username");
             $query->bindParam(":username",$username);
             $query->execute();
@@ -45,6 +48,9 @@
                 elseif(!preg_match($passwordRegExp,$newPassword)){
                     returnWithError("passwordFailedRegExp");
                 }
+                elseif(strlen($newPassword) > 72){
+                    returnWithError("tooLongInput");
+                }
                 else{
                     $hashedPassword = password_hash($newPassword,PASSWORD_DEFAULT);
                     $query = $connection->prepare("UPDATE users SET password = :newPassword WHERE BINARY username = :username");
@@ -57,8 +63,37 @@
                 returnWithError("wrongPassword");
             }
         }
+        if($newUsername != -1 && $allowUsernameChange){
+            if(usernameNotAvailable($connection,$newUsername)){
+                returnWithError("usernameNotAvailable");
+            }
+            elseif(strlen($newUsername) < $usernameMinLength){
+                returnWithError("usernameTooShort");
+            }
+            elseif(strlen($newUsername) > $usernameMaxLength){
+                returnWithError("tooLongInput");
+            }
+            elseif(!preg_match($usernameRegExp,$newUsername)){
+                returnWithError("usernameFailedRegExp");
+            }
+            else{
+                $query = $connection->prepare("UPDATE users SET username = :newUsername WHERE BINARY username = :username");
+                $query->bindParam(":newUsername",$newUsername);
+                $query->bindParam(":username",$username);
+                $query->execute();
 
-        // TODO: Error handling
+                if(!$query){
+                  $problems = true;  
+                }
+                else{
+                    $_SESSION["username"] = $newUsername;
+                }
+            }
+        }
+
+        if($problems){
+            returnWithError("errorOccurred");
+        }
         echo "accountModified";
     }
     else{
@@ -70,5 +105,18 @@
     function returnWithError($errorCode){
         echo $errorCode;
         die();
+    }
+
+    function usernameNotAvailable($connection,$username){
+        $query = $connection->prepare("SELECT * FROM users WHERE username = :username");
+        $query->bindParam(":username",$username);
+        $query->execute();
+        $result = $query->fetch();
+        if($result == NULL && $username != "admin"){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 ?>

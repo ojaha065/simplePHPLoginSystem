@@ -7,6 +7,14 @@
 */
 
 $(document).ready(function(){
+    if(!allowUsernameChange){
+        $("#username").attr({
+            disabled: "disabled",
+            readonly: "readonly"
+        });
+        $("#usernameChangeDisallowedText").show();
+    }
+
     $("#passwordCheckbox").change(function(){
         $("#changePasswordFieldset").slideToggle();
     });
@@ -14,7 +22,8 @@ $(document).ready(function(){
     $("#saveChangesButton").click(function(){
         var problems = false;
         var oldPassword = "";
-        var newPassword = "noChange";
+        var newPassword = -1;
+        var newUsername = -1;
         if($("#passwordCheckbox").prop("checked")){
             oldPassword = $("#oldPassword").val();
             newPassword = $("#newPassword").val();
@@ -25,19 +34,23 @@ $(document).ready(function(){
                 $("#errorModal").modal("show");
             }
         }
+        if($("#username").val() != $("#oldUsername").val()){
+            newUsername = $("#username").val();
+        }
         if(!problems){
-            modifyAccount(oldPassword,newPassword);
+            modifyAccount(oldPassword,newPassword,newUsername);
         }
     });
 });
 
-function modifyAccount(oldPassword,newPassword){
+function modifyAccount(oldPassword,newPassword,newUsername){
     $.ajax({
         method: "POST",
         url: "utils/modifyOwnAccount.php",
         data: {
             oldPassword: oldPassword,
-            newPassword: newPassword
+            newPassword: newPassword,
+            newUsername: newUsername
         },
         success: function(result){
             switch(result){
@@ -72,11 +85,39 @@ function modifyAccount(oldPassword,newPassword){
                     $("#errorModalMessage").html("Your password must follow these rules:<br />" + passwordRules);
                     $("#errorModal").modal("show");
                     break;
+                case "usernameNotAvailable":
+                    $("#errorModalTitle").html("That username is not available");
+                    $("#errorModalMessage").html("Sorry, that username is already taken. Try something else.");
+                    $("#errorModal").modal("show");
+                    break;
+                case "usernameTooShort":
+                    $("#errorModalTitle").html("Username too short");
+                    $("#errorModalMessage").html("Username needs to be at least " + usernameMinLength + "characters long.");
+                    $("#errorModal").modal("show");
+                    break;
+                case "tooLongInput":
+                    $("#errorModalTitle").html("Error: tooLongInput");
+                    $("#errorModalMessage").html("Error: tooLongInput");
+                    $("#errorModal").modal("show");
+                    break;
+                case "usernameFailedRegExp":
+                    $("#errorModalTitle").html("That username is not allowed");
+                    $("#errorModalMessage").html("Your username must follow these rules:<br />" + usernameRules);
+                    $("#errorModal").modal("show");
+                    break;
+                case "errorOccurred":
+                    $("#errorModalTitle").html("It's not you, it's us");
+                    $("#errorModalMessage").html("Something went wrong on our side. Try again later.");
+                    $("#errorModal").modal("show");
+                    break;
                 default:
                     $("#errorModalTitle").html("Error");
                     $("#errorModalMessage").html("Error: " + result);
                     $("#errorModal").modal("show");
             }
+
+            $("#changePasswordFieldset").hide();
+            $("#passwordCheckbox").prop("checked",false);
         },
         error: showAjaxError
     });
