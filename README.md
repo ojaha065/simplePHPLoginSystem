@@ -12,7 +12,7 @@ This project started as a simple school assignment for some PHP course I was att
 * It requires MySQL database. More info about setting up your database below.
 * I'm using the PDO interface. You also need PDO_MYSQL driver installed.
 * I have only tested it in PHP 7.0 and above but it should work all the way down to 5.5.0.
-* Users can change their ~~username~~ (planned) and password.
+* Users can change their username (if allowed via config) and password.
 
 ## File structure
 
@@ -29,13 +29,13 @@ The automatic installer (very WIP) resides here.
 #### /js
 This folder includes all .js files needed for the user interface to work.
 #### /utils
-This folder includes the backbone of the system. It has .php files for connecting to the database, login in and out and registering an new account. There's also scripts.js that includes general JavaScript goodies for the user interface. You need to insert your database info to databaseConnect.php, check database section below for help.
+This folder includes the backbone of the system. It has .php files for connecting to the database, login in and out, registering a new account and modifying existing accounts. There's also scripts.js that includes general JavaScript goodies for the user interface. You need to insert your database info to databaseConnect.php, check the setup section down below for help.
 #### LICENSE
 You should read this before using this. It's just a normal MIT license tho.
 #### README.md
 This file.
 #### account.php
-This is the account management page. Users can change their password here.
+This is the account management page. Users can change their username or password here.
 #### index.php
 This file is here just for the demo. The users can only see the page if they are logged in. Otherwise they are redirected to the login page.
 #### login.php
@@ -43,7 +43,7 @@ My take on creating a simple login form with Bootstrap. Feel free to modify it t
 #### register.php
 My take on creating a simple registration form with Bootstrap. Feel free to modify it to fit your needs.
 #### wordlist.txt
-This is the list of 1000 most common English words. It's used by username suggestor. You can replace the list with your own .txt file. Every word on the list needs to be followed by line break.
+This is the list of the most common English words. It's used by username suggestor. You can replace the list with your own .txt file. Every word on the list needs to be followed by line break.
 
 ### Config options
 
@@ -72,6 +72,7 @@ If you are also using the front-end user interface I provide, then you can/must 
 | $timeout                     | Time of inactivity (in seconds) required to log user out   | 900          | any integer       |
 | $adminPanelTimeout           | Time of inactivity required to log user out from adminpanel| 450          | any integer       |
 | $errorMessages               | Show more verbose error messages.Might leak sensitive info!| default      |"default","verbose"|
+| $allowUsernameChange         | Should user's be able to change their username             | true         | Boolean           |
 
 
 #### Config options in config.js
@@ -84,10 +85,11 @@ If you are also using the front-end user interface I provide, then you can/must 
 | usernameRules               | This string is shown if username didn't match the regExp    |               | any string       |
 | passwordRules               | This string is shown if password didn't match the regExp    |               | any string       |
 | enableUsernameSuggestions   | Allows you to disable or enable username suggestions        | true          | Boolean          |
+| allowUsernameChange        | Should user's be able to change their username (UI only)    | true          | Boolean           |
 
 ## Setup
 
-As stated earlier, you need MySQL database. The database requires very little space and any fairly recent version of MySQl should work.
+As stated earlier, you'll need MySQL database. The database requires very little space and any fairly recent version of MySQl should work.
 
 ### Setting up the database manually
 0. Have a MySQL database that you have access to.
@@ -124,7 +126,7 @@ After setting up the database, you'll need to create your first user account wit
 * If createAdmin.php does not work, you can also temporarily change ````$newAccountAccessLevel```` in **config/config.php** to "admin" and then create a new account using the normal registration form. Remember to change the value back to "user" afterwards.
 
 **IMPORTANT**
-I highly recommended that you delete the /install folder before using this in live production environment. Future version will do that automatically.
+I highly recommended that you delete the /install folder before using this in live production environment. Future versions will do that automatically.
 
 ### FAQ
 #### Why don't you have a automatic wizard for inserting database info and doing all this SQL stuff?
@@ -169,8 +171,6 @@ That error message means that `PDOException` occured while trying to connect to 
 5. Something else.  
  Please open issue here on GitHub i and I try to figure it out.
  
- I'm planning to introduce more verbose error messages sometime in the future to help with the situations like this.
-
 ### Dates and/or are wrong!
 Notice that on default settings the dates are saved in European format. (Day before month) You can change that behavior with a config option in **config.php**.
 Also, the saved time is the **server's time, not your/user computer's**. If your host is in different time zone than you then the the times will be offset. I'm planning to add $timeOffset config option to help with this problem.
