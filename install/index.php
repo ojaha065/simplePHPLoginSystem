@@ -84,7 +84,7 @@
                     </div>
                     <div class="card-body">
                         <p class="card-text">Next, we'll create a new table in your database.</p>
-                        <p class="card-text">If nothing happens when you click the button it means that the database connection failed. You can try turning verbose error messages on in <b>/config/config.php</b> to see detailed error message.</p>
+                        <p class="card-text">If nothing happens when you click the button or you are redirected to the begining of this wizard it means that the database connection failed. You can try turning verbose error messages on in <b>/config/config.php</b> to see what went wrong.</p>
                         <a href="createTable.php" class="btn btn-primary">Create new table now</a>
                     </div>
                     <div class="card-footer">
