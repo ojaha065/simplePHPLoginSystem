@@ -27,5 +27,5 @@
         die();
     }
 
-    echo "<br />All done. You may leave this page.<br />I recommend removing /install folder.";
+    echo "<br />All done. <a href='index.php?returnCode=stepTwoOK'>Click here to continue.</a>";
 ?>

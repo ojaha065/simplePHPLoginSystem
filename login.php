@@ -1,4 +1,11 @@
 <?php
+    require_once "config/config.php";
+
+    if(is_dir("install") && !isset($_GET["install"]) && !$debugSkipInstall){
+        header("location: install");
+        die();
+    }
+
     session_start();
 
     if(isset($_SESSION["username"])){
@@ -57,7 +64,7 @@
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
             <a id="selfRegistrationLink" href="register.php">Create account</a>
-            <small class="fixed-bottom">Version Alpha 0.4.2</small>
+            <small class="fixed-bottom">Version Alpha 0.5.0</small>
         </div>
     </body>
 </html>

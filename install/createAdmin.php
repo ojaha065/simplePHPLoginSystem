@@ -26,5 +26,5 @@
         die();
     }
 
-    echo "<br />All done. You may leave this page.<br />In production environment you MUST remove the /install folder.";
+    echo "<br />All done. <a href='index.php?returnCode=stepThreeOK&password=$randomPassword'>Click here to continue.</a>";
 ?>

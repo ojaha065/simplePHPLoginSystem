@@ -6,14 +6,7 @@
         (C) Jani Haiko, 2018
     */
 
-    ////// MODIFY THESE TO FIT YOUR ENVIRONMENT  
-    $host = "localhost";
-    $port = "3306"; // MySQL default: 3306
-    $databaseName = "mydatabase";
-    $databaseUsername = "root";
-    $databasePassword = "";
-
-    ////// DO NOT MODIFY ANYTHING BELOW THIS LINE
+    require_once "credentials.php";
 
     try{
         $connection = "mysql:host=$host:$port;dbname=$databaseName";
