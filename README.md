@@ -107,7 +107,6 @@ If any problems happen during automatic installation, you must set up the databa
 0. Have a MySQL database that you have access to.
 1. Create table `users` with four colums: `username` , `password` , `accessLevel` and `lastLogin`. Use a string data type like CHAR. I personally like to use VARCHAR. I would also add auto incrementing id field but that is not strictly required.
 2. Insert your database hostname, port, name and credentials into **/utils/databaseConnect.php**. I recommend creating dedicated account with restricted permissions.
-3. Remove /install folder from the root of the file structure. You can also remove the removeInstall.php
 
 #### Field lengths
 If you are using VARCHAR or other data type with varying maximum string length, then the table below will be useful.
@@ -133,10 +132,10 @@ CREATE TABLE IF NOT EXISTS users (
 
 #### Creating the first account
 After setting up the database, you'll need to create your first user account with admin rights. There's two ways to do that:
-* Navigate to **/install/createAdmin.php**. That will create a new account with admin rights using username ````admin```` and random password. (If you followed my SQL-sample above and set UNIQUE constraint to the username field, then the account won't be created if it already exists. You won't get error message) Log in to that account and change the password using the account management page.
+* Navigate to **/install/createAdmin.php**. That will create a new account with admin rights using username ````admin```` and random password. (If you followed my SQL-sample above and set UNIQUE constraint to the username field, then the account won't be created if it already exists. You won't get error message) After you have created the admin account, you must remove the /install folder. Finally, log into to the newly created account and change the password using the account management page.
 
 **OR**
-* If createAdmin.php does not work, you can also temporarily change ````$newAccountAccessLevel```` in **config/config.php** to "admin" and then create a new account using the normal registration form. Remember to change the value back to "user" afterwards.
+* If createAdmin.php does not work, you can also temporarily change ````$newAccountAccessLevel```` in **config/config.php** to "admin" and then create a new account using the normal registration form. You need to remove the /install folder to be able to access the login page. Remember to change the value back to "user" afterwards.
 
 **IMPORTANT**
 I remind you again that you **MUST** delete the /install folder before using this in live production environment. **Otherwise anyone can see your database credentials!**
