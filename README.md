@@ -7,6 +7,7 @@ This project started as a simple school assignment for some PHP course I was att
 ## Some basic info
 
 * It should be secure enough for general use. I take no responsibility tho.
+* I has automatic installer. (still WIP)
 * It uses PHP's `password_hash()` function to hash and salt the passwords. Usernames are saved as a plain text.
   * I'm using `PASSWORD_DEFAULT` which at time of the writing uses BCRYPT.
 * It requires MySQL database. More info about setting up your database below.
@@ -25,7 +26,7 @@ This folder includes two files that are used to set some config options. More in
 #### /css
 Just some CSS goodies for the UI.
 #### /install
-The automatic installer (very WIP) resides here.
+The automatic installer resides here.
 #### /js
 This folder includes all .js files needed for the user interface to work.
 #### /utils
@@ -42,6 +43,8 @@ This file is here just for the demo. The users can only see the page if they are
 My take on creating a simple login form with Bootstrap. Feel free to modify it to fit your needs.
 #### register.php
 My take on creating a simple registration form with Bootstrap. Feel free to modify it to fit your needs.
+#### removeInstall.php
+This is used by the automatic installer to remove itself after the installation is complete.
 #### wordlist.txt
 This is the list of the most common English words. It's used by username suggestor. You can replace the list with your own .txt file. Every word on the list needs to be followed by line break.
 
@@ -66,6 +69,7 @@ If you are also using the front-end user interface I provide, then you can/must 
 | $debugMode                   | Allows you to disable dabase connection (for debuging only)| "no"         | "no"              |
 | $debugAdminUsername          | Allows you to log in while in debug mode                   | "admin"      | any string        |
 | $debugAdminPassword          | Allows you to log in while in debug mode                   | ""           | any string        |
+| $debugSkipInstall            | This is for debug purposes only                            | false        | false             |
 | $dateSeperator               | The seperator between numbers in dates. (eg. "/" or ".")   | "."          | any string        |
 | $timeSeperator               | The seperator between numbers in times.                    | ":"          | any string        |
 | $mmddyyyy                    | Save dates in MMDDYYYY format instead of DDMMYYYY          | false        | Boolean           |
@@ -85,16 +89,25 @@ If you are also using the front-end user interface I provide, then you can/must 
 | usernameRules               | This string is shown if username didn't match the regExp    |               | any string       |
 | passwordRules               | This string is shown if password didn't match the regExp    |               | any string       |
 | enableUsernameSuggestions   | Allows you to disable or enable username suggestions        | true          | Boolean          |
-| allowUsernameChange        | Should user's be able to change their username (UI only)    | true          | Boolean           |
+| allowUsernameChange         | Should user's be able to change their username (UI only)    | true          | Boolean           |
 
 ## Setup
 
-As stated earlier, you'll need MySQL database. The database requires very little space and any fairly recent version of MySQl should work.
+As stated earlier, you'll need MySQL database. The database requires very little space and any fairly recent version of MySQl should work. You can set up your database and create admin account manually, or you can use my automatic installer.
+
+### Using the automatic installer
+0. Have a MySQL database that you have access to.
+1. Navigate (using browser) to the root of the file structure. You will be redirected to the install wizard.  
+    * You can can also directly navigate to ***/install/***.
+2. Follow on-screen instructions.
+
+If any problems happen during automatic installation, you must set up the database and admin account manually. See instructions below.
 
 ### Setting up the database manually
 0. Have a MySQL database that you have access to.
 1. Create table `users` with four colums: `username` , `password` , `accessLevel` and `lastLogin`. Use a string data type like CHAR. I personally like to use VARCHAR. I would also add auto incrementing id field but that is not strictly required.
 2. Insert your database hostname, port, name and credentials into **/utils/databaseConnect.php**. I recommend creating dedicated account with restricted permissions.
+3. Remove /install folder from the root of the file structure. You can also remove the removeInstall.php
 
 #### Field lengths
 If you are using VARCHAR or other data type with varying maximum string length, then the table below will be useful.
@@ -118,7 +131,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 ````
 
-### Creating the first account
+#### Creating the first account
 After setting up the database, you'll need to create your first user account with admin rights. There's two ways to do that:
 * Navigate to **/install/createAdmin.php**. That will create a new account with admin rights using username ````admin```` and random password. (If you followed my SQL-sample above and set UNIQUE constraint to the username field, then the account won't be created if it already exists. You won't get error message) Log in to that account and change the password using the account management page.
 
@@ -126,19 +139,18 @@ After setting up the database, you'll need to create your first user account wit
 * If createAdmin.php does not work, you can also temporarily change ````$newAccountAccessLevel```` in **config/config.php** to "admin" and then create a new account using the normal registration form. Remember to change the value back to "user" afterwards.
 
 **IMPORTANT**
-I highly recommended that you delete the /install folder before using this in live production environment. Future versions will do that automatically.
+I remind you again that you **MUST** delete the /install folder before using this in live production environment. **Otherwise anyone can see your database credentials!**
 
 ### FAQ
-#### Why don't you have a automatic wizard for inserting database info and doing all this SQL stuff?
-I'm planning to create something like that sometime in near future. Stay posted.
-
-#### I have a database but don't what any of that jargon about tables and colums mean. Help?
-~~Don't know your SQL? Don't worry, just wait a little while. I'm planning to create a automatic wizard that can do most of this stuff for you.~~ After inserting your database info into **/utils/databaseConnect.php** navigate to **/install/createTable.php**. That should create needed table for you.
-##### createTable.php just redirects me to the login page!
-Something went wrong when trying to connect you your database. Try turning more verbose error messages on in **/config/config.php**. Double check the your database hostname, port, name and credentials and check the general FAQ below for more help.
 
 #### I don't know what port my database is using.
 MySQL default is 3306.
+
+### Installer wizard starts from the beginning after completing it.
+This happens when the wizard fails to remove itself. That is usually caused by some restrictive permissions on host. Fix the problem by manually removing the /install folder.
+
+### My database connection does not work.
+Check troubleshooting tips for 'Connection error occured' in general FAQ below.
 
 ## The admin panel
 
