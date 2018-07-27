@@ -74,7 +74,8 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="button" id="stepOneContinue" class="btn btn-success">I'm ready to continue</button>
+                    <button type="button" id="stepOneContinue" class="btn btn-success">Test the database connection</button>
+                    <p id="stepOneErrors" class="text-danger"></p>
                 </div>
             </div>
 
@@ -83,8 +84,8 @@
                         <h4 class="card-title">Step 2</h4>
                     </div>
                     <div class="card-body">
+                        <p class="card-text text-success">Database connection: OK</p>
                         <p class="card-text">Next, we'll create a new table in your database.</p>
-                        <p class="card-text">If nothing happens when you click the button or you are redirected to the begining of this wizard it means that the database connection failed. You can try turning verbose error messages on in <b>/config/config.php</b> to see what went wrong.</p>
                         <a href="createTable.php" class="btn btn-primary">Create new table now</a>
                     </div>
                     <div class="card-footer">

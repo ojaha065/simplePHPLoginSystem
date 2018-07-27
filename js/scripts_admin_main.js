@@ -23,7 +23,7 @@ $(document).ready(function(){
         var lastLogin = $(this).parent().siblings(".lastLogin").html();
         $("#modify_username").val(username);
         $("#modify_accessLevel").val(accessLevel);
-        $("#modify_lastLogin").val(lastLogin);
+        $("#modify_lastLogin").val(lastLogin.replace("<i>","").replace("</i>",""));
         $("#modifyModal").modal("show");
     });
 

@@ -19,7 +19,30 @@ $(document).ready(function(){
     }
 
     $("#stepOneContinue").click(function(){
-        $("#stepOneContinue").parents(".card").hide().next().show();
+        $("#stepOneContinue").prop("disabled",true);
+        $("#stepOneContinue").html("Please wait...");
+        $.ajax({
+            method: "GET",
+            url: "../utils/databaseConnect.php",
+            data: {
+                test: true
+            },
+            success: function(result){
+                if(result !== ""){
+                    $("#stepOneErrors").html("Database connection failed. Detailed error info:<br />" + result);
+                }
+                else{
+                    $(".card").first().hide().next().show();
+                }
+                $("#stepOneContinue").html("Test again");
+                $("#stepOneContinue").prop("disabled",false);
+            },
+            error: function(error){
+                $("stepOneError").html("AJAX failed. Detailed error info:<br />" + error.status + ": " + error.statusText);
+                $("#stepOneContinue").html("Test again");
+                $("#stepOneContinue").prop("disabled",false);
+            }
+        });
     });
     $("#tableManualButton").click(function(){
         $("#stepThree").show().prev().hide();

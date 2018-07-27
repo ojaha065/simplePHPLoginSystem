@@ -6,6 +6,8 @@
     */
 
     require_once "../config/config.php";
+
+    $install = true;
     require_once "../utils/databaseConnect.php";
 
     echo "Trying to create table...";

@@ -40,7 +40,7 @@
         <p>Here is my secret content that only registered users can see.</p>
         <a href="account.php">Open account management page</a>
         <br />
-        <a href="admin">Open admin panel (only works with admin rights)</a>
+        <a href="admin">Open admin panel (only works with the admin rights)</a>
         <br />
         <a href="utils/logout.php">Logout</a>
     </body>
