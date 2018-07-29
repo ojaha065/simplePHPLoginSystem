@@ -54,6 +54,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="../config/config.js"></script>
+        <script src="../utils/scripts.js"></script>
         <script src="../js/scripts_admin_main.js"></script>
     </head>
     <body>
@@ -108,7 +109,7 @@
                                 <div class="form-group">
                                     <label for="modify_password">Password</label>
                                     <input type="text" class="form-control" id="modify_password" value="SET" readonly />
-                                    <small>You can only edit your own password!</small>
+                                    <small>You cannot edit or see passwords here!</small>
                                 </div>
                                 <div class="form-group">
                                     <label for="modify_accessLevel">AccessLevel</label>
@@ -130,6 +131,41 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard changes</button>
                             <button type="button" id="saveChangesButton" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add new account</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="addAccountUsername">Username</label>
+                                    <input type="text" class="form-control" id="addAccountUsername" required />
+                                    <div class="invalid-feedback">Please enter a valid username</div>
+                                    <button id="generateUsername" type="button" class="btn btn-info btn-sm">Generate random</button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addAccountPassword">Password</label>
+                                    <input type="text" class="form-control" id="addAccountPassword" readonly disabled required />
+                                    <small>Password will be randomly assigned.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="addAccountAccessLevel">AccessLevel</label>
+                                    <select class="form-control" id="addAccountAccessLevel" required>
+                                        <option value="admin">Admin</option>
+                                        <option value="user" selected>User</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="addAccountButton" class="btn btn-primary">Create account</button>
                         </div>
                     </div>
                 </div>
@@ -181,6 +217,7 @@
                     ?>
                 </tbody>
             </table>
+            <button data-toggle="modal" data-target="#addAccountModal" type="button" class="btn btn-info">Add new account</button>
             <a href="../index.php" class="btn btn-secondary">Close admin panel</a>
         </div>
     </body>
