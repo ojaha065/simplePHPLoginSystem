@@ -30,7 +30,7 @@ The automatic installer resides here.
 #### /js
 This folder has all .js files needed for the user interface to work.
 #### /utils
-This folder includes the backbone of the system. It has .php files for connecting to the database, login in and out, registering a new account and modifying existing accounts. There's also scripts.js that has some general JavaScript goodies for the user interface. You need to insert your database info to credentials.php, check the setup section down below for help.
+This folder includes the backbone of the system. It has .php files for connecting to the database, login in and out, registering/creating a new account and modifying existing accounts. There's also scripts.js that has some general JavaScript goodies for the user interface. You need to insert your database info to credentials.php, check the setup section down below for help.
 #### LICENSE
 You should read this before using this. It's just a normal MIT license tho.
 #### README.md
@@ -140,6 +140,8 @@ After setting up the database, you'll need to create your first admin account. T
 **IMPORTANT!**
 I remind you again that you **MUST** delete the /install folder before using this in live production environment. **Otherwise anyone can see your database credentials!**
 
+After setup you can create new accounts (admin or normal) using the admin panel.
+
 ### Setup FAQ
 
 #### I don't know what port my database is using.
@@ -158,6 +160,7 @@ _The admin panel is in very early stage of the development. Many things might be
 ### Admin panel allows admins to...
 * See all user accounts, their access level and last login time
 * Modify user's access level and reset their last login time
+* Create new accounts
 * Delete user accounts
 
 More to be added in the future.
@@ -178,10 +181,16 @@ That error message means that `PDOException` occured while trying to connect to 
 3. PHP's PDO interface or `PDO_MYSQL` driver is not available or configured properly.  
  Try updating to the latest version of PHP if possible. Make sure you or your host enable `PDO_MYSQL`.
 4. Your host's firewall is blocking the connection.  
- Make sure that your or your host's firewall is not blocking the connection.  
+ Make sure that your or your host's firewall is not blocking the connection. Please note that some hosts disallow MySQL connections to outside their infrastructure.  
 5. Something else.  
  Please open issue here on GitHub i and I try to figure it out.
+ 
+### Does the "Remember me" option on the login page even work?
+No, it doesn't and it's been that way far too long, I know. I'm planning to get to it, soon™.
  
 ### Dates and/or times are wrong!
 Notice that on default settings the dates are saved in European format. (Day before month) You can change that behavior with a config option in **config.php**.
 Also, the saved time is the **server's time, not your/user computer's**. If your host is in different time zone than you then the the times will be offset. I'm planning to add $timeOffset config option to help with this problem.
+
+### Why I can't set my own password when creating a account via admin panel?
+I consider it a security risk as some people would be inclined to use too simple or same passwords. However, I might allow this in future versions via a config option.
