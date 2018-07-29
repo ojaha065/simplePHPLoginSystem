@@ -55,9 +55,13 @@ $(document).ready(function(){
                     url: "wordlist.txt",
                     success: function(result){
                         wordlist = result.split(/\r?\n/g);
+                        var usernameSuggestion = wordlist[randomNumberBetween(0,wordlist.length - 1)];
+                        usernameSuggestion += "_" + wordlist[randomNumberBetween(0,wordlist.length - 1)];
                         while(true){
-                            var usernameSuggestion = wordlist[randomNumberBetween(0,wordlist.length - 1)];
-                            if(usernameSuggestion.length >= usernameMinLength){
+                            if(usernameSuggestion.length < usernameMinLength){
+                                usernameSuggestion += "_" + wordlist[randomNumberBetween(0,wordlist.length - 1)];
+                            }
+                            else{
                                 break;
                             }
                         }
