@@ -34,3 +34,7 @@ var enableUsernameSuggestions = true;
 // This setting is client-side (browser) only.
 // Also use the similar setting in config.php if you want to fully disallow username changes.
 var allowUsernameChange = true;
+
+// This message (if enabled) is always shown on the login page
+var enableLoginMessage = false;
+var loginMessage = "";

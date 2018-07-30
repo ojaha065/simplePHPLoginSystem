@@ -43,7 +43,8 @@
     <body>
         <div class="container">
             <h1>Login to your account</h1>
-            <div class="alert alert-dismissible fade show" role="alert">
+            <div id="loginMessage" class="alert alert-primary show" role="alert"></div>
+            <div id="errorAlert" class="alert alert-dismissible fade show" role="alert">
                 <p id="alertMessage"></p>
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
             </div>
@@ -64,7 +65,7 @@
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
             <a id="selfRegistrationLink" href="register.php">Create account</a>
-            <small class="fixed-bottom">Version Alpha 0.5.3</small>
+            <small class="fixed-bottom">Version Alpha 0.5.5</small>
         </div>
     </body>
 </html>

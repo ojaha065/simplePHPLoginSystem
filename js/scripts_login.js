@@ -13,25 +13,32 @@ $(document).ready(function(){
 
     switch(getUrlParameter("returnCode")){
         case "accountCreated":
-            $(".alert").addClass("alert-success");
+            $("#errorAlert").addClass("alert-success");
             $("#alertMessage").html("Your account was successfully created. Please log in below.");
             break;
         case "usernameNotFound":
-            $(".alert").addClass("alert-danger");
+            $("#errorAlert").addClass("alert-danger");
             $("#alertMessage").html("Your username or password was incorrect.");
             break;
         case "timeout":
-            $(".alert").addClass("alert-info");
+            $("#errorAlert").addClass("alert-info");
             $("#alertMessage").html("You were logged out due to inactivity. Please log in again.");
             break;
         case "connectionError":
-            $(".alert").addClass("alert-danger");
+            $("#errorAlert").addClass("alert-danger");
             $("#alertMessage").html("Connection error occured. Try again later.");
             break;
         case "valuesNotSet": // This should never happen under normal circumstances.
-            $(".alert").addClass("alert-secondary");
+            $("#errorAlert").addClass("alert-secondary");
             $("#alertMessage").html("Error: Values not set");
             break;
-        default: $(".alert").alert("close");
+        default: $("#errorAlert").alert("close");
+    }
+
+    if(enableLoginMessage){
+        $("#loginMessage").html(loginMessage);
+    }
+    else{
+        $("#loginMessage").alert("close"); 
     }
 });
