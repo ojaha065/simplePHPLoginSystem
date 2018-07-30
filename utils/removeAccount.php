@@ -9,7 +9,7 @@
 
     session_start();
 
-    if($debugMode == "IKnowWhatIAmDoing" || $_SESSION["accessLevel"] !== "admin" || $_SERVER["HTTP_X_REQUESTED_WITH"] != "XMLHttpRequest"){
+    if($debugMode == "IKnowWhatIAmDoing" || $_SESSION["accessLevel"] !== "admin" || !isset($_SERVER["HTTP_X_REQUESTED_WITH"]) || strtolower($_SERVER["HTTP_X_REQUESTED_WITH"]) != "xmlhttprequest"){
         returnWithError("securityError");
         die();
     }
