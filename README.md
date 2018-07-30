@@ -89,7 +89,9 @@ If you are also using the front-end user interface I provide, then you can/must 
 | usernameRules               | This string is shown if username didn't match the regExp    |               | any string       |
 | passwordRules               | This string is shown if password didn't match the regExp    |               | any string       |
 | enableUsernameSuggestions   | Allows you to disable or enable username suggestions        | true          | Boolean          |
-| allowUsernameChange         | Should user's be able to change their username (UI only)    | true          | Boolean           |
+| allowUsernameChange         | Should user's be able to change their username (UI only)    | true          | Boolean          |
+| enableLoginMessage          | Display any message on the login page                       | false         | Boolean          |
+| loginMessage                | Define the message to show when enableLoginMessage is true  | ""            | any string       |
 
 ## Setup
 
