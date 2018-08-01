@@ -1,4 +1,9 @@
 <?php
+    require "utils/config.php";
+    if($forceHTTPS){
+        forceHTTPS();
+    }
+
     session_start();
 
     if(isset($_SESSION["username"])){

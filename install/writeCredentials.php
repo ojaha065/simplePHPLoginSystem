@@ -11,7 +11,7 @@
 
     $data = "<?php \$host=\"$host\";\$port=\"$port\";\$databaseName=\"$databaseName\";\$databaseUsername=\"$databaseUsername\";\$databasePassword=\"$databasePassword\"; ?>";
 
-    $file = fopen("../utils/credentials.php","w") or die("File open failed. You might not have proper permissions. You can also manually enter the credentials into <b>/utils/credentials.php</b>");
-    fwrite($file,$data);
+    $file = fopen("../utils/credentials.php","w") or die("File open failed. You might not have proper permissions.");
+    fwrite($file,$data) or die("File write failed. You might not have proper permissions.");
     fclose($file);
 ?>

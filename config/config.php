@@ -52,4 +52,16 @@
     // Also use similar setting in config.php.
     $allowUsernameChange = true;
 
+    // Forces users to access to page via secure connection (highly recommended).
+    // Might cause issues if host doesn't support it.
+    $forceHTTPS = true;
+
+    /////////////////////////
+
+    function forceHTTPS(){
+        if(empty($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] !== "on"){
+            header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+            die();
+        }
+    }
 ?>

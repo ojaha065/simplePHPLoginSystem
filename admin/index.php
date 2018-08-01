@@ -6,6 +6,9 @@
     */
 
     require_once "../config/config.php";
+    if($forceHTTPS){
+        forceHTTPS();
+    }
     session_start();
 
     if(!isset($_SESSION["username"])){

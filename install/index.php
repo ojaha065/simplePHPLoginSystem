@@ -1,4 +1,8 @@
 <?php
+    require "../config/config.php";
+    if($forceHTTPS){
+        forceHTTPS();
+    }
     include "../utils/credentials.php";
 ?>
 

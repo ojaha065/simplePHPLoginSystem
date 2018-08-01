@@ -1,5 +1,8 @@
 <?php
     require_once "config/config.php";
+    if($forceHTTPS){
+        forceHTTPS();
+    }
 
     session_start();
 

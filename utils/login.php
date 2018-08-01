@@ -5,8 +5,6 @@
         (C) Jani Haiko, 2018
     */
     
-    echo "If you are reading this, then the login process is taking longer than excepted...";
-
     require_once "../config/config.php";
     session_start();
 

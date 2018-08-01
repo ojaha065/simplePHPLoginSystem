@@ -1,8 +1,11 @@
 <?php
     require_once "config/config.php";
+    if($forceHTTPS){
+        forceHTTPS();
+    }
 
     if(is_dir("install") && !isset($_GET["install"]) && !$debugSkipInstall){
-        header("location: install");
+        header("location: install/index.php");
         die();
     }
 
@@ -65,7 +68,7 @@
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
             <a id="selfRegistrationLink" href="register.php">Create account</a>
-            <small class="fixed-bottom">Version Alpha 0.5.5</small>
+            <small class="fixed-bottom">Version Alpha 0.5.8</small>
         </div>
     </body>
 </html>
