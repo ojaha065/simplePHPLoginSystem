@@ -34,7 +34,6 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text">First, let's try opening a connection to your database. Insert your database hostname, port, name and credentials into the corresponding fields below.</p>
-                    <small>In case of the problems, you can also enter the credentials manually into <b>/utils/credentials.php</b>.</small>
                     <div class="table-responsive-sm">
                         <table class="table table-bordered table-hover table-sm">
                             <caption>Current settings</caption>
