@@ -1,4 +1,4 @@
-# Just a very barebones PHP login system
+# Just a simple PHP login system
 
 _Please note that this is is still WIP._
 
@@ -7,7 +7,7 @@ This project started as a simple school assignment for some PHP course I was att
 ## Some basic info
 
 * It should be secure enough for general use. I take no responsibility tho.
-* I has automatic installer for creating the database. (still WIP)
+* I has an automatic installer.
 * It uses PHP's `password_hash()` function to hash and salt the passwords. Usernames are saved as a plain text.
   * I'm using `PASSWORD_DEFAULT` which at time of the writing uses BCRYPT.
 * It requires MySQL database. More info about setting up your database below.
@@ -103,7 +103,7 @@ As stated earlier, you'll need a MySQL database. The database requires very litt
     * You can can also directly navigate to **/install/**.
 2. Follow on-screen instructions.
 
-If the automatic installer does not work, you need to set up the database and admin account manually. See instructions below.
+During the first step of the installation the installer needs to write a file to your host's drive. If you don't have proper permissions for that, you must do the install manually. See the instructions below.
 
 ### Setting up the database manually
 0. Have a MySQL database that you have access to.
@@ -134,10 +134,10 @@ CREATE TABLE IF NOT EXISTS users (
 
 #### Creating the first admin account
 After setting up the database, you'll need to create your first admin account. There's two ways to do that:
-* Navigate to **/install/createAdmin.php**. That will create a new account with admin rights using username ````admin```` and a  randomly generated password. (If you followed my SQL-sample above and set UNIQUE constraint to the username field, then the account won't be created if it already exists. You won't get error message) After you have created the admin account, you must remove the /install folder. Finally, log into to the newly created account and change the password using the account management page.
+* Navigate to **/install/createAdmin.php**. That will create a new account with admin rights using username ````admin```` and a  randomly generated password. (If you followed my SQL-sample above and set UNIQUE constraint to the username field, then the account won't be created if it already exists. You won't get error message) After you have created the admin account, you must remove (or rename) the /install folder. Finally, log into to the newly created account and change the password using the account management page.
 
 **OR**
-* If createAdmin.php does not work, you can also temporarily change ````$newAccountAccessLevel```` in **config/config.php** to "admin" and then create a new account using the normal registration form. You need to remove the /install folder to be able to access the login page. Remember to change the value back to "user" afterwards.
+* If createAdmin.php does not work for some reason, you can also temporarily change ````$newAccountAccessLevel```` in **config/config.php** to "admin" and then create a new account using the normal registration form. You need to remove (or rename the /install folder to be able to access the login page. Remember to change the value back to "user" afterwards.
 
 **IMPORTANT!**
 I remind you again that you **MUST** delete the /install folder before using this in live production environment. **Otherwise anyone can see your database credentials!**
@@ -153,7 +153,7 @@ MySQL default is 3306.
 This happens when the wizard fails to remove itself. That is usually caused by some restrictive permissions on the host. Fix the problem by manually removing the /install folder.
 
 #### My database connection does not work.
-Check troubleshooting tips for 'Connection error occured' in general FAQ below.
+Check troubleshooting tips in general FAQ below.
 
 ## The admin panel
 
@@ -174,8 +174,8 @@ _/admin_
 ### How do I turn on the debug mode?
 Read config.php more carefully.
 
-### I'm getting 'Connection error occured' message and I'm sure that I have entered my database info correctly into **/utils/credentials.php**
-That error message means that `PDOException` occured while trying to connect to the database. You can turn more verbose error messages on in **/config/config.php**. The most common causes are:
+### I'm getting 'Connection error occured' message or the automatic installer throws error(s) when trying to connect to my database.
+That means that `PDOException` occured while trying to connect to the database. You can turn more verbose error messages on in **/config/config.php**. The most common causes are:
 1. Wrong database hostname, port, name or credentials.  
  Double check them.
 2. The database is down.  
