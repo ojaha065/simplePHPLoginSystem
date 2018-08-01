@@ -52,7 +52,7 @@
     // Also use similar setting in config.php.
     $allowUsernameChange = true;
 
-    // Forces users to access to page via secure connection (highly recommended).
+    // Forces users to access the page via secure connection (highly recommended).
     // Might cause issues if host doesn't support it.
     $forceHTTPS = true;
 
