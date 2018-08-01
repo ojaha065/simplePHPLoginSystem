@@ -53,13 +53,13 @@
     $allowUsernameChange = true;
 
     // Forces users to access the page via secure connection (highly recommended).
-    // Might cause issues if host doesn't support it.
-    $forceHTTPS = true;
+    // Might cause issues on some hosts.
+    $forceHTTPS = false;
 
     /////////////////////////
 
     function forceHTTPS(){
-        if(empty($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] !== "on"){
+        if(empty($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] == "off"){
             header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
             die();
         }
