@@ -77,6 +77,7 @@ If you are also using the front-end user interface I provide, then you can/must 
 | $adminPanelTimeout           |Time of inactivity required to log user out from admin panel| 450          | any integer       |
 | $errorMessages               | Show more verbose error messages.Might leak sensitive info!| default      |"default","verbose"|
 | $allowUsernameChange         | Should user's be able to change their username             | true         | Boolean           |
+| $forceHTTPS                  | Redirects all non-HTTPS connections to HTTPS               | true         | Boolean           |
 
 
 #### Config options in config.js
