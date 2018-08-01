@@ -1,9 +1,5 @@
 <?php
-    include "../utils/credentials.php";
-    if(!isset($databasePassword)){
-        echo "credentials.php failed";
-        die();
-    }
+    include "../utils/credentials_sample.php";
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +20,7 @@
             }
         </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="../utils/scripts.js"></script>
         <script src="scripts.js"></script>
@@ -36,8 +33,8 @@
                     <h4 class="card-title">Step 1</h4>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">First, open <b>/utils/credentials.php</b> in any text editor. Insert your database hostname, port, name and credentials into the corresponding spots.</p>
-                    <p>Then, refresh the table below and double check that the values are correct.</p>
+                    <p class="card-text">First, let's try opening a connection to your database. Insert your database hostname, port, name and credentials into the corresponding fields below.</p>
+                    <small>In case of the problems, you can also enter the credentials manually into <b>/utils/credentials.php</b>.</small>
                     <div class="table-responsive-sm">
                         <table class="table table-bordered table-hover table-sm">
                             <caption>Current settings</caption>
@@ -50,31 +47,31 @@
                             <tbody>
                                 <tr>
                                     <td>Hostname</td>
-                                    <td><?php echo $host; ?></td>
+                                    <td><input id="hostname" data-toggle="tooltip" title="e.g. 'localhost' or 'exampleSQLHost.com'" type="text" required value='<?php echo $host; ?>' /></td>
                                 </tr>
                                 <tr>
                                     <td>Port</td>
-                                    <td><?php echo $port; ?></td>
+                                    <td><input id="port" data-toggle="tooltip" title="MySQL default: 3306" type="number" value='<?php echo $port; ?>' /></td>
                                 </tr>
                                 <tr>
                                     <td>Database name</td>
-                                    <td><?php echo $databaseName; ?></td>
+                                    <td><input id="databaseName" data-toggle="tooltip" title="Name of your MySQL database. Is case-sensitive!" type="text" required value='<?php echo $databaseName; ?>' /></td>
                                 </tr>
                                 <tr>
                                     <td>Database username</td>
-                                    <td><?php echo $databaseUsername; ?></td>
+                                    <td><input id="databaseUsername" data-toggle="tooltip" title="If you don't know, try 'root' (Using root might be a security risk!)" type="text" required value='<?php echo $databaseUsername; ?>' /></td>
                                 </tr>
                                 <tr>
                                     <td>Database password</td>
-                                    <td><?php echo $databasePassword; ?></td>
+                                    <td><input id="databasePassword" data-toggle="tooltip" title="Please use secure passwords!" type="password" required value='<?php echo $databasePassword; ?>' /></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <small><a href="index.php">Refresh</a></small>
+                        <small><a href="index.php">Refresh table (Loads current saved values)</a></small>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="button" id="stepOneContinue" class="btn btn-success">Test the database connection</button>
+                    <button type="button" id="stepOneContinue" class="btn btn-success">Save settings and test the database connection</button>
                     <p id="stepOneErrors" class="text-danger"></p>
                 </div>
             </div>

@@ -18,28 +18,58 @@ $(document).ready(function(){
         default: $(".card").first().show();
     }
 
+    // Let's enable tooltips
+    $("[data-toggle='tooltip']").tooltip({
+        placement: "right"
+    });
+
     $("#stepOneContinue").click(function(){
         $("#stepOneContinue").prop("disabled",true);
         $("#stepOneContinue").html("Please wait...");
         $.ajax({
-            method: "GET",
-            url: "../utils/databaseConnect.php",
+            method: "POST",
+            url: "writeCredentials.php",
             data: {
-                test: true
+                hostname: $("#hostname").val(),
+                port: $("#port").val(),
+                databaseName: $("#databaseName").val(),
+                databaseUsername: $("#databaseUsername").val(),
+                databasePassword: $("#databasePassword").val()
             },
             success: function(result){
-                if(result !== ""){
-                    $("#stepOneErrors").html("Database connection failed. Detailed error info:<br />" + result);
+                if(result != ""){
+                    $("#stepOneErrors").html(result);
+                    $("#stepOneContinue").html("Try again");
+                    $("#stepOneContinue").prop("disabled",false);
                 }
                 else{
-                    $(".card").first().hide().next().show();
+                    $.ajax({
+                        method: "GET",
+                        url: "../utils/databaseConnect.php",
+                        data: {
+                            test: true
+                        },
+                        success: function(result){
+                            if(result !== ""){
+                                $("#stepOneErrors").html("Database connection failed. Detailed error info:<br />" + result);
+                            }
+                            else{
+                                $(".card").first().hide().next().show();
+                            }
+                            $("#stepOneContinue").html("Try again");
+                            $("#stepOneContinue").prop("disabled",false);
+                        },
+                        error: function(error){
+                            $("stepOneError").html("AJAX failed. Detailed error info:<br />" + error.status + ": " + error.statusText);
+                            $("#stepOneContinue").html("Try again");
+                            $("#stepOneContinue").prop("disabled",false);
+                        }
+                    });
                 }
-                $("#stepOneContinue").html("Test again");
-                $("#stepOneContinue").prop("disabled",false);
             },
             error: function(error){
                 $("stepOneError").html("AJAX failed. Detailed error info:<br />" + error.status + ": " + error.statusText);
-                $("#stepOneContinue").html("Test again");
+                $("#stepOneContinue").html("Try again");
                 $("#stepOneContinue").prop("disabled",false);
             }
         });
