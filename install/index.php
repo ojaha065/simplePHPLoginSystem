@@ -1,5 +1,5 @@
 <?php
-    include "../utils/credentials_sample.php";
+    include "../utils/credentials.php";
 ?>
 
 <!DOCTYPE html>
