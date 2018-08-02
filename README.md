@@ -77,7 +77,10 @@ If you are also using the front-end user interface I provide, then you can/must 
 | $adminPanelTimeout           |Time of inactivity required to log user out from admin panel| 450          | any integer       |
 | $errorMessages               | Show more verbose error messages.Might leak sensitive info!| default      |"default","verbose"|
 | $allowUsernameChange         | Should user's be able to change their username             | true         | Boolean           |
-| $forceHTTPS                  | Redirects all non-HTTPS connections to HTTPS               | true         | Boolean           |
+| $forceHTTPS                  | Redirects all non-HTTPS connections to HTTPS               | false        | Boolean           |
+
+##### About $forceHTTPS
+It's highly recommended to change this to true if your hosting solution supports HTTPS. Nowadays you can even get a free SSL certificate from [Let's Encrypt](https://letsencrypt.org/). On some (badly-configured) environments SERVER\["HTTPS"] superglobal is not defined even when HTTPS is in fact used. That results in a endless loop of redirecting. I myself learned that the hard way. That's way this setting is not enabled by default. There are other ways to check if HTTPS is in use and I'm currently looking into this issue. Stay tuned.
 
 
 #### Config options in config.js
