@@ -5,8 +5,6 @@
         (C) Jani Haiko, 2018
     */
     
-    echo "If you are reading this, then your account creation is taking longer than expected...";
-
     require_once "../config/config.php";
 
     if($debugMode == "IKnowWhatIAmDoing"){

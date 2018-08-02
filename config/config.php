@@ -56,10 +56,19 @@
     // Might cause issues on some hosts.
     $forceHTTPS = false;
 
+    // Config options end here
     /////////////////////////
 
     function forceHTTPS(){
-        if(empty($_SERVER["HTTPS"]) || $_SERVER["HTTPS"] == "off"){
+        if((!empty($_SERVER["HTTPS"]) && $_SERVER['HTTPS'] !== "off") || ((!empty($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"] == "https") || (!empty($_SERVER["HTTP_X_FORWARDED_SSL"]) && $_SERVER["HTTP_X_FORWARDED_SSL"] == "on"))){
+            $isHTTPS = true;
+        }
+        else{
+            $isHTTPS = false;
+        }
+
+        if(!$isHTTPS){
+            header("Strict-Transport-Security: max-age=1000");
             header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
             die();
         }
