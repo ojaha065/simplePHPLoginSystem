@@ -60,6 +60,17 @@
             $query->bindParam(":username",$username);
             $query->execute();
 
+            if(isset($_POST["rememberMe"]) && $_POST["rememberMe"] == "rememberMe"){
+                $rememberMeToken = bin2hex(random_bytes(rand(16,64)));
+                $query = $connection->prepare("UPDATE users SET rememberMeToken = :rememberMeToken WHERE BINARY username = :username");
+                $query->bindParam(":username",$username);
+                $query->bindParam(":rememberMeToken",$rememberMeToken);
+                $query->execute();
+
+                setcookie("rememberMeUsername",$username,time() + 2592000,"/","",$forceHTTPS,TRUE);
+                setcookie("rememberMeToken",$rememberMeToken,time() + 2592000,"/","",$forceHTTPS,TRUE);
+            }
+
             $_SESSION["username"] = $username;
             $_SESSION["lastActivity"] = time();
             header("location: ../index.php");

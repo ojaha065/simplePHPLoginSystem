@@ -15,6 +15,28 @@
         header("location: index.php");
     }
 
+    if(isset($_COOKIE["rememberMeUsername"]) && isset($_COOKIE["rememberMeToken"])){
+        require_once "utils/databaseConnect.php";
+        $query = $connection->prepare("SELECT * FROM users WHERE username = BINARY :username");
+        $query->bindParam(":username",$_COOKIE["rememberMeUsername"]);
+        $query->execute();
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        if($result !== NULL){
+            if($_COOKIE["rememberMeToken"] === $result["rememberMeToken"]){
+                $_SESSION["username"] = $_COOKIE["rememberMeUsername"];
+                $_SESSION["lastActivity"] = time();
+                header("location: /index.php");
+            }
+            else{
+                $query = $connection->prepare("UPDATE users SET rememberMeToken = :rememberMeToken WHERE username = BINARY :username");
+                $query->bindParam(":username",$_COOKIE["rememberMeUsername"]);
+                $query->bindParam(":rememberMeToken",NULL);
+                $query->execute();
+            }
+        }
+    }
+
     function getUsername(){
         if(isset($_SESSION["inputedUsername"])){
             return htmlspecialchars($_SESSION["inputedUsername"]);
@@ -62,13 +84,13 @@
                     <input class="form-control" type="password" id="password" name="password" required />
                 </div>
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe" />
+                    <input type="checkbox" class="form-check-input" name="rememberMe" value="rememberMe" />
                     <label class="form-check-label" for="rememberMe">Remember me</label> <!-- TODO -->
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
             <a id="selfRegistrationLink" href="register.php">Create account</a>
-            <small class="fixed-bottom">Version Beta 0.6.0</small>
+            <small class="fixed-bottom">Version Beta 0.7.0</small>
         </div>
     </body>
 </html>

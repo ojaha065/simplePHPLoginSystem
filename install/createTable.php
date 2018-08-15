@@ -17,7 +17,8 @@
         username VARCHAR(64) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL,
         accessLevel VARCHAR(10) NOT NULL,
-        lastLogin VARCHAR(16)
+        lastLogin VARCHAR(16),
+        rememberMeToken VARCHAR(255)
         );");
     if(!$query){
         print_r($connection->errorInfo());

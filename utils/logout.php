@@ -9,5 +9,8 @@
     session_unset();
     session_destroy();
 
+    setcookie("rememberMeUsername",$username,time() - 2592000,"/");
+    setcookie("rememberMeToken",$rememberMeToken,time() - 2592000,"/");
+
     header("location: ../index.php");
 ?>
