@@ -86,7 +86,7 @@
                     <div class="card-body">
                         <p class="card-text text-success">Database connection: OK</p>
                         <p class="card-text">Next, we'll create a new table in your database.</p>
-                        <a href="createTable.php" class="btn btn-primary">Create new table now</a>
+                        <a href="createTable.php" class="btn btn-primary">Create a table now</a>
                     </div>
                     <div class="card-footer">
                         <button type="button" id="tableManualButton" class="btn btn-secondary">I'll create the table manually</button>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="card-body">
                         <p class="card-text">Next, we'll create a new user account with admin rights.</p>
-                        <p class="card-text">That account will get a random password. You will be able to change the password later.</p>
+                        <p class="card-text">That account will get a random password. You must change the password later.</p>
                         <a href="createAdmin.php" class="btn btn-primary">Create account</a>
                     </div>
             </div>
@@ -109,9 +109,9 @@
                         <h4 class="card-title">Step 4</h4>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">Now you can test that everything in working correctly. Click to link below to open the login page and log in with the newly created account.</p>
+                        <p class="card-text">Now you can test that everything in working correctly. Click to link below to open the login page and log in with the newly created admin account.</p>
                         <p>Remember to change the password of the account in the account management page.</p>
-                        <p>Come back here after testing.</p>
+                        <p>Come back here after testing and changing to password.</p>
                         <div class="border">
                             Username: admin
                             <br />
