@@ -70,6 +70,13 @@
                 setcookie("rememberMeUsername",$username,time() + 2592000,"/","",$forceHTTPS,TRUE);
                 setcookie("rememberMeToken",$rememberMeToken,time() + 2592000,"/","",$forceHTTPS,TRUE);
             }
+            else{
+                $empty = "notSet";
+                $query = $connection->prepare("UPDATE users SET rememberMeToken = :rememberMeToken WHERE username = BINARY :username");
+                $query->bindParam(":username",$username);
+                $query->bindParam(":rememberMeToken",$empty);
+                $query->execute();
+            }
 
             $_SESSION["username"] = $username;
             $_SESSION["lastActivity"] = time();

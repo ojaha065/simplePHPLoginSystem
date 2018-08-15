@@ -5,12 +5,31 @@
         (C) Jani Haiko, 2018
     */
 
+    $empty = "notSet";
+
+    setcookie("rememberMeUsername",null,time() - 2592000,"/");
+    setcookie("rememberMeToken",null,time() - 2592000,"/");
+
     session_start();
+
+    if(isset($_SESSION["username"])){
+        $username = $_SESSION["username"];
+    }
+    else{
+        session_unset();
+        session_destroy();
+        header("location: ../index.php");
+        die();
+    }
+
     session_unset();
     session_destroy();
 
-    setcookie("rememberMeUsername",$username,time() - 2592000,"/");
-    setcookie("rememberMeToken",$rememberMeToken,time() - 2592000,"/");
+    require_once "databaseConnect.php";
+    $query = $connection->prepare("UPDATE users SET rememberMeToken = :rememberMeToken WHERE username = BINARY :username");
+    $query->bindParam(":username",$username);
+    $query->bindParam(":rememberMeToken",$empty);
+    $query->execute();
 
     header("location: ../index.php");
 ?>

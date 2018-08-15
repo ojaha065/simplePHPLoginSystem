@@ -29,7 +29,7 @@
     $debugMode = "no";
     $debugAdminUsername = "admin";
     $debugAdminPassword = "";
-    $debugSkipInstall = false;
+    $debugSkipInstall = true;
 
     // Date and time settings
     // Default settings saves dates in European format: 23.06.2018
