@@ -1,4 +1,4 @@
-# Just a simple PHP login system
+# Just a another PHP login system
 
 _Please note that this is is still WIP._
 
@@ -12,7 +12,7 @@ This project started as a simple school assignment for some PHP course I was att
   * I'm using `PASSWORD_DEFAULT` which at time of the writing uses BCRYPT.
 * It requires MySQL database. More info about setting up your database below.
 * I'm using the PDO interface. You also need PDO_MYSQL driver installed.
-* I have only tested it in PHP 7.0 and above but it should work all the way down to 5.5.0.
+* It requires PHP 7.0 or newer.
 * Users can change their username (if allowed via config) and password.
 
 ## File structure
@@ -99,7 +99,7 @@ In 2018 it's considered a huge security risk to not use HTTPS when dealing with 
 
 ## Setup
 
-As stated earlier, you'll need a MySQL database. The database requires very little space and any fairly recent version of MySQl should work. You can set up your database and create admin account manually, or you can use my automatic installer.
+As stated earlier, you'll need a MySQL database. The database does not require a lot if space (unless you have LOTS of users) and any fairly recent version of MySQl should work. You can set up your database and create admin account manually, or you can use my automatic installer.
 
 ### Using the automatic installer
 0. Have a MySQL database that you have access to.
@@ -111,18 +111,19 @@ During the first step of the installation the installer needs to write a file to
 
 ### Setting up the database manually
 0. Have a MySQL database that you have access to.
-1. Create table `users` with four colums: `username` , `password` , `accessLevel` and `lastLogin`. Use a string data type like CHAR. I personally like to use VARCHAR. I would also add a auto incrementing id field but that is not strictly required.
+1. Create table `users` with five colums: `username` , `password` , `accessLevel` , `lastLogin` and `rememberMeToken`. Use a string data type like CHAR. I personally like to use VARCHAR. I would also add a auto incrementing id field but that is not strictly required.
 2. Insert your database hostname, port, name and credentials into **/utils/credentials.php**. I recommend using a dedicated account with restricted permissions.
 
 #### Field lengths
 If you are using VARCHAR or other data type with varying maximum string length, then the table below will be useful.
 
-| Field       | Required length (minimum)                                                        |
-|-------------|----------------------------------------------------------------------------------|
-| username    | Same as $usernameMaxLength in config.php                                         |
-| password    | I recommend using 255 to be safe (As PHP's default crypting method might change) |
-| accessLevel | 5                                                                                |
-| lastLogin   | 16                                                                               |
+| Field          | Required length (minimum)                                                        |
+|----------------|----------------------------------------------------------------------------------|
+| username       | Same as $usernameMaxLength in config.php                                         |
+| password       | I recommend using 255 to be safe (As PHP's default crypting method might change) |
+| accessLevel    | 5                                                                                |
+| lastLogin      | 16                                                                               |
+| rememberMeToken| 255                                                                              |
 
 #### Don't know your SQL?
 Don't worry, something like this should get you covered:
@@ -132,7 +133,8 @@ CREATE TABLE IF NOT EXISTS users (
  username VARCHAR(64) NOT NULL UNIQUE,
  password VARCHAR(255) NOT NULL,
  accessLevel VARCHAR(10) NOT NULL,
- lastLogin VARCHAR(16)
+ lastLogin VARCHAR(16),
+ rememberMeToken VARCHAR(255)
 );
 ````
 
@@ -192,8 +194,24 @@ That means that `PDOException` occured while trying to connect to the database. 
  Please open issue here on GitHub i and I try to figure it out.
  
 ### Does the "Remember me" option on the login page even work?
-No, it doesn't and it's been that way far too long, I know. I'm planning to get to it, soon™.
- 
+~~No, it doesn't and it's been that way far too long, I know. I'm planning to get to it, soon™.~~
+Update: It's working now. Please note that it only remembers the login for 30 days (For security reasons).
+
+### Isn't that Remember me option a huge security risk?
+Yes, I know that implementing something like that always opens new security holes. However, I'm not forcing users to use it or anything. If the user doesn't check the checkbox, no access token is created so there's no security risk for that user.
+#### This is how the remember me option works:
+0. User logs in with their username and password and they check to checkbox.
+1. New token is created for that user using cryptographically secure `random_bytes()` function. That token is saved to the database and two cookies are sent to the browser. The value of the first cookie is the username of the user as a plain text. The second cookie is much more important. It's value is the created token.
+2. User who has these two cookies arrives to the login page. If the token in the users cookie matches the token in the database the user is automatically logged in.
+3. The token is invalidated if user manually logs out or 30 days has passed.
+#### What are the risks?
+The main problem is that if "the bad guy" is somehow able to get access to the user's token they can easily forge a cookie and log in as that user.
+#### What I'm doing to mimimize these risks?
+* No token is created if user does not check the checkbox.
+* Tokens are invalidated during logout.
+* If HTTPS is used, secure flag is set to the cookies.
+* Updates coming soon...
+
 ### Dates and/or times are wrong!
 Notice that on default settings the dates are saved in European format. (Day before month) You can change that behavior with a config option in **config.php**.
 Also, the saved time is the **server's time, not your/user computer's**. If your host is in different time zone than you then the the times will be offset. I'm planning to add $timeOffset config option to help with this problem.
