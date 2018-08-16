@@ -11,6 +11,7 @@ $(document).ready(function(){
     $(".actions").html(actionIcons);
     $(".fa-cog").attr("title","Modify").tooltip();
     $(".fa-trash-alt").attr("title","Delete account").tooltip();
+    $(".hasTooltip").tooltip();
 
     $(".fa-trash-alt").click(function(){
         var username = $(this).parent().siblings(".d-none").html();
@@ -75,6 +76,43 @@ $(document).ready(function(){
             }
         });
     });
+
+    $("#invalidateTokensButton").click(function(){
+        $.ajax({
+            method: "POST",
+            url: "../utils/theDangerZone.php",
+            data: {
+                action: "invalidateTokens"
+            },
+            success: function(result){
+                switch(result){
+                    case "OK":
+                        $("#untrustTokensModal").modal("hide");
+                        $("#openInvalidateModal").html("Invalidated").prop("disabled",true);
+                        break;
+                    case "securityError":
+                        $("#errorModalTitle").html("Security error");
+                        $("#errorModalMessage").html("There was a security problem and that action is not permited right now.");
+                        $("#errorModal").modal("show");
+                        break;
+                    case "timeout":
+                        location.href = "../login.php?returnCode=timeout";
+                        break;
+                    case "invalidAction":
+                        $("#errorModalTitle").html("Error");
+                        $("#errorModalMessage").html("Error: Invalid action");
+                        $("#errorModal").modal("show");
+                        break;
+                    case "valuesNotSet":
+                        $("#errorModalTitle").html("Error");
+                        $("#errorModalMessage").html("Error: valuesNotSet");
+                        $("#errorModal").modal("show");
+                        break;
+                }
+            },
+            error: showAjaxError
+        });
+    });
 });
 
 function removeAccount(username){
@@ -90,7 +128,7 @@ function removeAccount(username){
             }
             else if(result == "securityError"){
                 $("#errorModalTitle").html("Security error");
-                $("#errorModalMessage").html("There was security problem and that action is not permited right now.");
+                $("#errorModalMessage").html("There was a security problem and that action is not permited right now.");
                 $("#errorModal").modal("show");
             }
             else if(result == "accountActive"){

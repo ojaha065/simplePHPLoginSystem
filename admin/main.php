@@ -220,8 +220,33 @@
                     ?>
                 </tbody>
             </table>
+
             <button data-toggle="modal" data-target="#addAccountModal" type="button" class="btn btn-info">Add new account</button>
             <a href="../index.php" class="btn btn-secondary">Close admin panel</a>
+
+            <hr />
+            <div class="border p-2">
+                <h3 class="text-danger">The Danger Zone</h3>
+                <button id="openInvalidateModal" data-toggle="modal" data-target="#untrustTokensModal" type="button" class="btn btn-secondary hasTooltip" title="All users need to login again, even if they checked the 'Remember me' option.">Invalidate all login tokens</button>
+            </div>
+
+            <div class="modal fade" id="untrustTokensModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Are you sure?</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Do you really want to invalidate ALL (including your own) login tokens? They are used by the 'Remember me' checkbox. All users need to login again, even if they checked the checkbox.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="invalidateTokensButton" class="btn btn-danger">Invalidate tokens</button>
+                            <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

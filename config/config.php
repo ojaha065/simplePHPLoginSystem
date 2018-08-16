@@ -29,7 +29,7 @@
     $debugMode = "no";
     $debugAdminUsername = "admin";
     $debugAdminPassword = "";
-    $debugSkipInstall = false;
+    $debugSkipInstall = true;
 
     // Date and time settings
     // Default settings saves dates in European format: 23.06.2018
@@ -58,6 +58,8 @@
 
     // Config options end here
     /////////////////////////
+
+    $nullToken = "notSet";
 
     function forceHTTPS(){
         if((!empty($_SERVER["HTTPS"]) && $_SERVER['HTTPS'] !== "off") || ((!empty($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"] == "https") || (!empty($_SERVER["HTTP_X_FORWARDED_SSL"]) && $_SERVER["HTTP_X_FORWARDED_SSL"] == "on"))){
