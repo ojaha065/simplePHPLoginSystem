@@ -71,10 +71,9 @@
                 setcookie("rememberMeToken",$rememberMeToken,time() + 2592000,"/","",$forceHTTPS,TRUE);
             }
             else{
-                $empty = "notSet";
                 $query = $connection->prepare("UPDATE users SET rememberMeToken = :rememberMeToken WHERE username = BINARY :username");
                 $query->bindParam(":username",$username);
-                $query->bindParam(":rememberMeToken",$empty);
+                $query->bindParam(":rememberMeToken",$nullToken);
                 $query->execute();
             }
 

@@ -59,6 +59,7 @@
     // Config options end here
     /////////////////////////
 
+    // Do not change this (unless you know what you're doing)
     $nullToken = "notSet";
 
     function forceHTTPS(){

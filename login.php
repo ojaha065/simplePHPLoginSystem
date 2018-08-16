@@ -15,8 +15,6 @@
         header("location: index.php");
     }
 
-    $empty = "notSet";
-
     if(isset($_COOKIE["rememberMeUsername"]) && isset($_COOKIE["rememberMeToken"])){
         require_once "utils/databaseConnect.php";
         $query = $connection->prepare("SELECT * FROM users WHERE username = BINARY :username");
@@ -24,7 +22,7 @@
         $query->execute();
         $result = $query->fetch(PDO::FETCH_ASSOC);
 
-        if($result !== NULL && $result["rememberMeToken"] != NULL && $result["rememberMeToken"] != "notSet"){
+        if($result !== NULL && $result["rememberMeToken"] != NULL && $result["rememberMeToken"] != $nullToken){
             if($_COOKIE["rememberMeToken"] === $result["rememberMeToken"]){
                 $_SESSION["username"] = $_COOKIE["rememberMeUsername"];
                 $_SESSION["lastActivity"] = time();
@@ -33,7 +31,7 @@
             else{
                 $query = $connection->prepare("UPDATE users SET rememberMeToken = :rememberMeToken WHERE username = BINARY :username");
                 $query->bindParam(":username",$_COOKIE["rememberMeUsername"]);
-                $query->bindParam(":rememberMeToken",$empty);
+                $query->bindParam(":rememberMeToken",$nullToken);
                 $query->execute();
 
                 setcookie("rememberMeUsername",null,time() - 2592000,"/");
