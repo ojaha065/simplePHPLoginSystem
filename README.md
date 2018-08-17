@@ -208,7 +208,7 @@ Yes, I know that implementing something like that always opens new security hole
 The main problem is that if "the bad guy" is somehow able to get access to the user's token they can easily forge a cookie and log in as that user. There are two ways for the bad guy to get access to user's token: By somehow (e.g. SQL injection) getting it from the database or by stealing the cookie and/or it's value from the user.
 #### What I'm doing to mimimize these risks?
 * No token is created if user does not check the checkbox.
-* Tokens are invalidated if user manually logs out.
+* Tokens are invalidated if user manually logs out or their session timeouts.
 * If HTTPS is used, secure flag is set to the cookies.
 * All tokens can be easily invalidated by the admin.
 * Updates coming soon...
