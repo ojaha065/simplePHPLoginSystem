@@ -64,7 +64,7 @@ function modifyAccount(oldPassword,newPassword,newUsername){
                     $("#errorModalMessage").html("There was security problem and that action is not permited right now.");
                     $("#errorModal").modal("show");
                     break;
-                case "timeout": location.href = "../login.php?returnCode=timeout";
+                case "timeout": location.href = "login.php?returnCode=timeout";
                 case "valuesNotSet":
                     $("#errorModalTitle").html("Error");
                     $("#errorModalMessage").html("Error: valuesNotSet");

@@ -11,6 +11,15 @@
         die();
     }
     if(!isset($_SESSION["lastActivity"]) || time() - $_SESSION["lastActivity"] > $timeout){
+        require_once "utils/databaseConnect.php";
+        $query = $connection->prepare("UPDATE users SET rememberMeToken = :rememberMeToken WHERE username = BINARY :username");
+        $query->bindParam(":username",$_SESSION["username"]);
+        $query->bindParam(":rememberMeToken",$nullToken);
+        $query->execute();
+
+        setcookie("rememberMeUsername",null,time() - 2592000,"/");
+        setcookie("rememberMeToken",null,time() - 2592000,"/");
+
         session_unset();
         session_destroy();
         header("location: login.php?returnCode=timeout");

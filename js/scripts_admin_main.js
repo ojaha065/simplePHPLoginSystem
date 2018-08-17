@@ -85,9 +85,9 @@ $(document).ready(function(){
                 action: "invalidateTokens"
             },
             success: function(result){
+                $("#untrustTokensModal").modal("hide");
                 switch(result){
                     case "OK":
-                        $("#untrustTokensModal").modal("hide");
                         $("#openInvalidateModal").html("Invalidated").prop("disabled",true);
                         break;
                     case "securityError":

@@ -5,7 +5,7 @@
         (C) Jani Haiko, 2018
     */
 
-    $empty = "notSet";
+    $nullToken = "notSet";
 
     setcookie("rememberMeUsername",null,time() - 2592000,"/");
     setcookie("rememberMeToken",null,time() - 2592000,"/");
@@ -28,7 +28,7 @@
     require_once "databaseConnect.php";
     $query = $connection->prepare("UPDATE users SET rememberMeToken = :rememberMeToken WHERE username = BINARY :username");
     $query->bindParam(":username",$username);
-    $query->bindParam(":rememberMeToken",$empty);
+    $query->bindParam(":rememberMeToken",$nullToken);
     $query->execute();
 
     header("location: ../index.php");

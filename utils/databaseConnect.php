@@ -13,7 +13,7 @@
     }
 
     if(isset($_SESSION["lastRequest"])){
-        if(time() - $_SESSION["lastRequest"] < 2){
+        if(time() - $_SESSION["lastRequest"] < 1){
             echo "You are sending too many requests. Wait a little while before trying again.";
             $_SESSION["lastRequest"] = time();
             die();
