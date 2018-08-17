@@ -150,7 +150,7 @@ $(document).ready(function(){
                         console.info("This is non-critical error.");
                     }
                     $("#theDangerZone").append("<p id='easterEggCopyright'><a href='https://soundcloud.com/monkmakesnoises/2012-03-18-highway-to-the' target='_blank'>Audio</a> by <i>monkmakesnoises</i> is licensed under <a href='https://creativecommons.org/licenses/by/3.0/' target='_blank'>CC BY 3.0</a>.</p>");
-                },1500);
+                },15000);
             },
             mouseleave: function(){
                 clearTimeout(t);
