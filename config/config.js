@@ -38,3 +38,5 @@ var allowUsernameChange = true;
 // This message (if enabled) is always shown on the login page
 var enableLoginMessage = false;
 var loginMessage = "";
+
+var easterEggs = true;

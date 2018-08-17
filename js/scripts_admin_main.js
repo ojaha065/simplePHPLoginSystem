@@ -113,6 +113,59 @@ $(document).ready(function(){
             error: showAjaxError
         });
     });
+
+    if(easterEggs){
+        var t;
+        var tt;
+        var audio;
+        $("#theDangerZone").on({
+            mouseenter: function(){
+                t = setTimeout(function(){
+                    try{
+                        audio = new Audio("http://jaha1.mbnet.fi/dangerZone.mp3");
+                        audio.play();
+                        var theDangerZone = $("#theDangerZone");
+                        tt = setInterval(function(){
+                            switch(Math.floor(Math.random() * 5)){
+                                case 0:
+                                    theDangerZone.css("backgroundColor","blue");
+                                    break;
+                                case 1:
+                                    theDangerZone.css("backgroundColor","white");
+                                    break;
+                                case 2:
+                                    theDangerZone.css("backgroundColor","red");
+                                    break;
+                                case 3:
+                                    theDangerZone.css("backgroundColor","pink");
+                                    break;
+                                case 4:
+                                    theDangerZone.css("backgroundColor","black");
+                                    break;
+                            }
+                        },250);
+                    }
+                    catch(error){
+                        console.error(error);
+                        console.info("This is non-critical error.");
+                    }
+                    $("#theDangerZone").append("<p id='easterEggCopyright'><a href='https://soundcloud.com/monkmakesnoises/2012-03-18-highway-to-the' target='_blank'>Audio</a> by <i>monkmakesnoises</i> is licensed under <a href='https://creativecommons.org/licenses/by/3.0/' target='_blank'>CC BY 3.0</a>.</p>");
+                },1500);
+            },
+            mouseleave: function(){
+                clearTimeout(t);
+                clearInterval(tt);
+                $("#theDangerZone").css("backgroundColor","unset");
+                try{
+                    audio.pause();
+                    $("#easterEggCopyright").remove();
+                }
+                catch(error){
+    
+                }
+            }
+        });
+    }
 });
 
 function removeAccount(username){

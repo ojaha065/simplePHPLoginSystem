@@ -4,7 +4,7 @@
         forceHTTPS();
     }
 
-    if(is_dir("install") && !isset($_GET["install"]) && !$debugSkipInstall){
+    if(is_dir("install") && !isset($_GET["install"]) && !$debugSkipInstall && !isset($_GET["skipInstall"])){
         header("location: install/index.php");
         die();
     }

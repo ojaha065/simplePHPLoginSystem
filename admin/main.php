@@ -234,7 +234,7 @@
             <a href="../index.php" class="btn btn-secondary">Close admin panel</a>
 
             <hr />
-            <div class="border p-2">
+            <div id="theDangerZone" class="border p-2">
                 <h3 class="text-danger">The Danger Zone</h3>
                 <button id="openInvalidateModal" data-toggle="modal" data-target="#untrustTokensModal" type="button" class="btn btn-secondary hasTooltip" title="All users need to login again, even if they checked the 'Remember me' option.">Invalidate all login tokens</button>
             </div>
