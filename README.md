@@ -13,6 +13,7 @@ This project started as a simple school assignment for some PHP course I was att
 * It requires MySQL database. More info about setting up your database below.
 * I'm using the PDO interface. You also need PDO_MYSQL driver installed.
 * It requires PHP 7.0 or newer.
+  * You can use PHP versions all the way down to 5.5.0 if you use [random_compat](https://github.com/paragonie/random_compat) (or similar) library.
 * Users can change their username (if allowed via config) and password.
 
 ## File structure
@@ -151,6 +152,9 @@ I remind you again that you **MUST** delete the /install folder before using thi
 After setup you can create new accounts (admin or normal) using the admin panel.
 
 ### Setup FAQ
+
+#### "Your random_bytes function is not working properly"
+This means that installer noticed that the function `random_bytes(int)` does not exist or work properly. If you are using PHP version older than 7.0 you must use 3rd party library that implements that function. For PHP 5.x I recommend [this one](https://github.com/paragonie/random_compat).
 
 #### I don't know what port my database is using.
 MySQL default is 3306.
