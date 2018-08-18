@@ -3,6 +3,28 @@
     if($forceHTTPS){
         forceHTTPS();
     }
+
+    try{
+        $test = random_bytes(64);
+    }
+    catch(TypeError $e){
+        echo "Your random_bytes function is not working properly. Check that you're using at least PHP version 7.0 or random_compat (or similar) library.";
+        echo "<br />Error info: The function exists but for some reason throws TypeError. You are probably using some 3rd library that is broken.";
+        die();
+    }
+    catch(Error $e){
+        echo "Your random_bytes function is not working properly. Check that you're using at least PHP version 7.0 or random_compat (or similar) library.";
+        echo "<br />Error info: The function does not exist or it throws Error. If you are using some 3rd party library, check it's documentation.";
+        echo "<br />Error info: ",$e;
+        die();
+    }
+    catch(Exception $e){
+        echo "Your random_bytes function is not working properly. Check that you're using at least PHP version 7.0 or random_compat (or similar) library.";
+        echo "<br />Error info: random_bytes function throws an Exception. If you are using some 3rd party library, check it's documentation.";
+        echo "<br />Error info: ",$e;
+        die();
+    }
+
     include "../utils/credentials.php";
 ?>
 
