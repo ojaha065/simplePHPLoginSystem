@@ -13,16 +13,24 @@
     }
 
     if(isset($_SESSION["lastRequest"])){
-        if(time() - $_SESSION["lastRequest"] < 1){
-            echo "You are sending too many requests. Wait a little while before trying again.";
-            $_SESSION["lastRequest"] = time();
-            die();
+        if(time() - $_SESSION["lastRequest"] < 3){
+            if($_SESSION["tooFast"]){
+                echo "You are sending too many requests. Wait a short while before trying again.";
+                $_SESSION["lastRequest"] = time();
+                die();
+            }
+            else{
+                $_SESSION["tooFast"] = true;
+                $_SESSION["lastRequest"] = time();
+            }
         }
         else{
+            $_SESSION["tooFast"] = false;
             $_SESSION["lastRequest"] = time();
         }
     }
     else{
+        $_SESSION["tooFast"] = false;
         $_SESSION["lastRequest"] = time();
     }
 
