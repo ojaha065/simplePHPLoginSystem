@@ -4,25 +4,46 @@
         forceHTTPS();
     }
 
-    try{
-        $test = random_bytes(64);
+    if(isset($_POST["saveSettingsButton"])){
+        try{
+            $settingsFile = fopen("../config/config.php","w");
+            fwrite($settingsFile,$_POST["config"]);
+            fclose($settingsFile);
+            $_POST = array();
+            header("Location: index.php?returnCode=stepThreeOK&extraData=OK");
+            die("You should not see this.");
+        }
+        catch(Exception $e){
+            $_POST = array();
+            header("Location: index.php?returnCode=stepThreeOK&extraData=writeFailed");
+            die("You should not see this.");
+        }
     }
-    catch(TypeError $e){
-        echo "Your random_bytes function is not working properly. Check that you're using at least PHP version 7.0 or random_compat (or similar) library.";
-        echo "<br />Error info: The function exists but for some reason throws TypeError. You are probably using some 3rd library that is broken.";
-        die();
-    }
-    catch(Error $e){
-        echo "Your random_bytes function is not working properly. Check that you're using at least PHP version 7.0 or random_compat (or similar) library.";
-        echo "<br />Error info: The function does not exist or it throws Error. If you are using some 3rd party library, check it's documentation.";
-        echo "<br />Error info: ",$e;
-        die();
-    }
-    catch(Exception $e){
-        echo "Your random_bytes function is not working properly. Check that you're using at least PHP version 7.0 or random_compat (or similar) library.";
-        echo "<br />Error info: random_bytes function throws an Exception. If you are using some 3rd party library, check it's documentation.";
-        echo "<br />Error info: ",$e;
-        die();
+    else{
+        try{
+            $test = random_bytes(64);
+        }
+        catch(TypeError $e){
+            echo "Your random_bytes function is not working properly. Check that you're using at least PHP version 7.0 or random_compat (or similar) library.";
+            echo "<br />Error info: The function exists but for some reason throws TypeError. You are probably using some 3rd library that is broken.";
+            die();
+        }
+        catch(Error $e){
+            echo "Your random_bytes function is not working properly. Check that you're using at least PHP version 7.0 or random_compat (or similar) library.";
+            echo "<br />Error info: The function does not exist or it throws Error. If you are using some 3rd party library, check it's documentation.";
+            echo "<br />Error info: ",$e;
+            die();
+        }
+        catch(Exception $e){
+            echo "Your random_bytes function is not working properly. Check that you're using at least PHP version 7.0 or random_compat (or similar) library.";
+            echo "<br />Error info: random_bytes function throws an Exception. If you are using some 3rd party library, check it's documentation.";
+            echo "<br />Error info: ",$e;
+            die();
+        }
+    
+        $settingsFile = fopen("../config/config.php","r") or die("Unable to read the config.php. Make sure you have read access to the disk.");
+        $config = fread($settingsFile,filesize("../config/config.php"));
+        fclose($settingsFile);
     }
 
     include "../utils/credentials.php";
@@ -43,6 +64,10 @@
         <style>
             .card, #stepFourContinue{
                 display: none;
+            }
+            #config{
+                width: 95%;
+                min-height: 500px;
             }
         </style>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -120,6 +145,23 @@
                         <h4 class="card-title">Step 3</h4>
                     </div>
                     <div class="card-body">
+                    <p class="text-danger">You can seriously break things here. Only modify the config options below if you know what you're doing.</p>
+                    <p class="text-info">Read more about the config options from the readme.</p>
+                        <form method="POST" action="index.php">
+                            <textarea name="config" id="config"><?php echo $config; ?></textarea>
+                            <button name="saveSettingsButton" type="submit" class="btn btn-primary">Save and continue</button>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button id="skipSettings" type="button" class="btn btn-secondary" formaction="index.php">Skip this and use the defaults</button>
+                    </div>
+            </div>
+
+            <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Step 4</h4>
+                    </div>
+                    <div class="card-body">
                         <p class="card-text">Next, we'll create a new user account with admin rights.</p>
                         <p class="card-text">That account will get a random password. You must change the password later.</p>
                         <a href="createAdmin.php" class="btn btn-primary">Create account</a>
@@ -128,7 +170,7 @@
 
             <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Step 4</h4>
+                        <h4 class="card-title">Step 5</h4>
                     </div>
                     <div class="card-body">
                         <p class="card-text">Now you can test that everything in working correctly. Click to link below to open the login page and log in with the newly created admin account.</p>

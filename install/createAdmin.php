@@ -26,5 +26,5 @@
         die();
     }
 
-    echo "<br />All done. <a href='index.php?returnCode=stepThreeOK&password=$randomPassword'>Click here to continue.</a>";
+    echo "<br />All done. <a href='index.php?returnCode=stepFourOK&password=$randomPassword'>Click here to continue.</a>";
 ?>

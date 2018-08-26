@@ -13,6 +13,14 @@ $(document).ready(function(){
             break;
         case "stepThreeOK":
             $("#stepThree").hide().next().show();
+            if(getUrlParameter("extraData") == "writeFailed"){
+                if(window.confirm("Writing the changed settings file to the disk failed. You might not have write access to the disk. Do you want to start the installation process from the beginning to try again. If you select NO then the default config options will be used.")){
+                    location.replace("index.php");
+                }
+            }
+            break;
+        case "stepFourOK":
+            $("#stepThree").hide().next().next().show();
             $("#adminPassword").html(getUrlParameter("password"));
             break;
         default: $(".card").first().show();
