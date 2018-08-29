@@ -1,5 +1,5 @@
 <?php
-    require "config/config.php";
+    require "./config/config.php";
     if($forceHTTPS){
         forceHTTPS();
     }

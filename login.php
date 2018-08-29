@@ -1,5 +1,5 @@
 <?php
-    require_once "config/config.php";
+    require_once "./config/config.php";
     if($forceHTTPS){
         forceHTTPS();
     }
@@ -16,7 +16,7 @@
     }
 
     if(isset($_COOKIE["rememberMeUsername"]) && isset($_COOKIE["rememberMeToken"])){
-        require_once "utils/databaseConnect.php";
+        require_once "./utils/databaseConnect.php";
         $query = $connection->prepare("SELECT * FROM users WHERE username = BINARY :username");
         $query->bindParam(":username",$_COOKIE["rememberMeUsername"]);
         $query->execute();

@@ -1,5 +1,5 @@
 <?php
-    require_once "config/config.php";
+    require_once "./config/config.php";
     if($forceHTTPS){
         forceHTTPS();
     }
@@ -11,7 +11,7 @@
         die();
     }
     if(!isset($_SESSION["lastActivity"]) || time() - $_SESSION["lastActivity"] > $timeout){
-        require_once "utils/databaseConnect.php";
+        require_once "./utils/databaseConnect.php";
         $query = $connection->prepare("UPDATE users SET rememberMeToken = :rememberMeToken WHERE username = BINARY :username");
         $query->bindParam(":username",$_SESSION["username"]);
         $query->bindParam(":rememberMeToken",$nullToken);
