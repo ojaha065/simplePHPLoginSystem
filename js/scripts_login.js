@@ -41,4 +41,13 @@ $(document).ready(function(){
     else{
         $("#loginMessage").alert("close"); 
     }
+
+    $("#rememberMe").change(function(){
+        if($(this).prop("checked")){
+            $("#rememberMeTimeFieldset").show();
+        }
+        else{
+            $("#rememberMeTimeFieldset").hide();
+        }
+    });
 });

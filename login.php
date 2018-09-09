@@ -66,6 +66,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no" />
         <title>Log In</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="css/styles_login.css" type="text/css" media="all" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="utils/scripts.js"></script>
@@ -91,8 +92,20 @@
                     <input class="form-control" type="password" id="password" name="password" required />
                 </div>
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" name="rememberMe" value="rememberMe" />
-                    <label class="form-check-label" for="rememberMe">Remember me</label> <!-- TODO -->
+                    <input type="checkbox" class="form-check-input" name="rememberMe" id="rememberMe" value="rememberMe" />
+                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                    <div id="rememberMeTimeFieldset">
+                        <label for="rememberMeTime">Remember me for</label>
+                        <select class="form-control" id="rememberMeTime" name="rememberMeTime">
+                            <option value="30">30 minutes</option>
+                            <option value="60">1 hour</option>
+                            <option value="12">2 hours</option>
+                            <option value="720">12 hours</option>
+                            <option value="1440">1 day</option>
+                            <option value="10080" selected>1 week</option>
+                            <option value="40320">1 month</option>
+                        </select>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
