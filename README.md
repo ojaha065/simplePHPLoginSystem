@@ -71,9 +71,6 @@ If you are also using the front-end user interface I provide, then you can/must 
 | $debugAdminUsername          | Allows you to log in while in debug mode                   | "admin"      | any string        |
 | $debugAdminPassword          | Allows you to log in while in debug mode                   | ""           | any string        |
 | $debugSkipInstall            | This is for debug purposes only                            | false        | false             |
-| $dateSeperator               | The seperator between numbers in dates. (eg. "/" or ".")   | "."          | any string        |
-| $timeSeperator               | The seperator between numbers in times.                    | ":"          | any string        |
-| $mmddyyyy                    | Save dates in MMDDYYYY format instead of DDMMYYYY          | false        | Boolean           |
 | $timeout                     | Time of inactivity (in seconds) required to log user out   | 900          | any integer       |
 | $adminPanelTimeout           |Time of inactivity required to log user out from admin panel| 450          | any integer       |
 | $errorMessages               | Show more verbose error messages.Might leak sensitive info!| default      |"default","verbose"|
@@ -112,7 +109,7 @@ During the first step of the installation the installer needs to write a file to
 
 ### Setting up the database manually
 0. Have a MySQL database that you have access to.
-1. Create table `users` with five colums: `username` , `password` , `accessLevel` , `lastLogin` and `rememberMeToken`. Use a string data type like CHAR. I personally like to use VARCHAR. I would also add a auto incrementing id field but that is not strictly required.
+1. Create table `users` with five colums: `username` , `password` , `accessLevel` , `lastLogin` and `rememberMeToken`. Use a string data type like CHAR. I personally like to use VARCHAR. For the `lastLogin` I recommend INT(11). I would also add a auto incrementing id field as a primary key but that is not strictly required.
 2. Insert your database hostname, port, name and credentials into **/utils/credentials.php**. I recommend using a dedicated account with restricted permissions.
 
 #### Field lengths
@@ -123,7 +120,7 @@ If you are using VARCHAR or other data type with varying maximum string length, 
 | username       | Same as $usernameMaxLength in config.php                                         |
 | password       | I recommend using 255 to be safe (As PHP's default crypting method might change) |
 | accessLevel    | 5                                                                                |
-| lastLogin      | 16                                                                               |
+| lastLogin      | 11                                                                               |
 | rememberMeToken| 255                                                                              |
 
 #### Don't know your SQL?
@@ -134,7 +131,7 @@ CREATE TABLE IF NOT EXISTS users (
  username VARCHAR(64) NOT NULL UNIQUE,
  password VARCHAR(255) NOT NULL,
  accessLevel VARCHAR(10) NOT NULL,
- lastLogin VARCHAR(16),
+ lastLogin INT(11),
  rememberMeToken VARCHAR(255)
 );
 ````
