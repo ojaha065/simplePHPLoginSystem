@@ -51,12 +51,9 @@
         $result = $result["password"];
 
         if(passwordIsCorrect($password,$result)){
-            $currentTime = date("dmYhia");
-            if($mmddyyyy){
-                $currentTime = date("mdYhia"); // You silly Americans...
-            }
+            $timestamp = time();
             $query = $connection->prepare("UPDATE users SET lastLogin = :lastLogin WHERE BINARY username = :username");
-            $query->bindParam(":lastLogin",$currentTime);
+            $query->bindParam(":lastLogin",$timestamp);
             $query->bindParam(":username",$username);
             $query->execute();
 

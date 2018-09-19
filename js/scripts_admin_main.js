@@ -13,6 +13,17 @@ $(document).ready(function(){
     $(".fa-trash-alt").attr("title","Delete account").tooltip();
     $(".hasTooltip").tooltip();
 
+    $(".lastLogin").each(function(){
+        var timestamp = Number($(this).html());
+        if(timestamp != -1){
+            var time = moment(new Date(timestamp * 1000));
+            $(this).html(time.fromNow());
+        }
+        else{
+            $(this).html("<i>Never</i>");
+        }
+    });
+
     $(".fa-trash-alt").click(function(){
         var username = $(this).parent().siblings(".d-none").html();
         $("#confirmDeletionModalUsername").html(username);

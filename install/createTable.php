@@ -17,7 +17,7 @@
         username VARCHAR(64) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL,
         accessLevel VARCHAR(10) NOT NULL,
-        lastLogin VARCHAR(16),
+        lastLogin INT(11),
         rememberMeToken VARCHAR(255)
         );");
     if(!$query){

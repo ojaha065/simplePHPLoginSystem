@@ -31,14 +31,6 @@
     $debugAdminPassword = "";
     $debugSkipInstall = false;
 
-    // Date and time settings
-    // Default settings saves dates in European format: 23.06.2018
-    // If you live in some silly country that uses MM/DD/YYYY then change $mmddyyyy to 'true'.
-    // Seperators can be almost anything.
-    $dateSeperator = ".";
-    $timeSeperator = ":";
-    $mmddyyyy = false;
-
     // Users are required to login again after timeout.
     // Times are in seconds.
     // Use something very big (like 99999999) to disable timeout. (Might be a security risk!)
