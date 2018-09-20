@@ -141,7 +141,7 @@ After setting up the database, you'll need to create your first admin account. T
 * Navigate to **/install/createAdmin.php**. That will create a new account with admin rights using username ````admin```` and a  randomly generated password. (If you followed my SQL-sample above and set UNIQUE constraint to the username field, then the account won't be created if it already exists. You won't get error message) After you have created the admin account, you must remove (or rename) the /install folder. Finally, log into to the newly created account and change the password using the account management page.
 
 **OR**
-* If createAdmin.php does not work for some reason, you can also temporarily change ````$newAccountAccessLevel```` in **config/config.php** to "admin" and then create a new account using the normal registration form. You need to remove (or rename the /install folder to be able to access the login page. Remember to change the value back to "user" afterwards.
+* If createAdmin.php does not work for some reason, you can also temporarily change ````$newAccountAccessLevel```` in **config/config.php** to "admin" and then create a new account using the normal registration form. You need to remove the /install folder to be able to access the login page. Remember to change the value back to "user" afterwards.
 
 **IMPORTANT!**
 I remind you again that you **MUST** delete the /install folder before using this in live production environment. **Otherwise anyone can see your database credentials!**
@@ -214,10 +214,6 @@ The main problem is that if "the bad guy" is somehow able to get access to the u
 * If HTTPS is used, secure flag is set to the cookies.
 * All tokens can be easily invalidated by the admin.
 * Updates coming soon...
-
-### Dates and/or times are wrong!
-Notice that on default settings the dates are saved in European format. (Day before month) You can change that behavior with a config option in **config.php**.
-Also, the saved time is the **server's time, not your/user computer's**. If your host is in different time zone than you then the the times will be offset. I'm planning to add $timeOffset config option to help with this problem.
 
 ### Why I can't set my own password when creating a account via admin panel?
 I consider it a security risk as some people would be inclined to use too simple or same passwords. However, I might allow this in future versions via a config option.
