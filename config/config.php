@@ -29,7 +29,7 @@
     $debugMode = "no";
     $debugAdminUsername = "admin";
     $debugAdminPassword = "";
-    $debugSkipInstall = true;
+    $debugSkipInstall = false;
 
     // Users are required to login again after timeout.
     // Times are in seconds.
