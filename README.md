@@ -210,6 +210,7 @@ The main problem is that if "the bad guy" is somehow able to get access to the u
 #### What I'm doing to mimimize these risks?
 * No token is created if user does not check the checkbox.
 * Tokens are invalidated if user manually logs out or their session timeouts.
+* Token is invalidated if user changes their username or password.
 * If HTTPS is used, secure flag is set to the cookies.
 * All tokens can be easily invalidated by the admin.
 * Updates coming soon...
