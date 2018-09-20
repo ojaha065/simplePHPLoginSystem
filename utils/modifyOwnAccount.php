@@ -43,6 +43,11 @@
 
         $problems = false;
 
+        $query = $connection->prepare("UPDATE users SET rememberMeToken = :rememberMeToken WHERE username = BINARY :username");
+        $query->bindParam(":username",$_SESSION["username"]);
+        $query->bindParam(":rememberMeToken",$nullToken);
+        $query->execute();
+
         if($newPassword != -1){
             $query = $connection->prepare("SELECT password FROM users WHERE username = BINARY :username");
             $query->bindParam(":username",$username);

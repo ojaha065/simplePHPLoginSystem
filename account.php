@@ -104,6 +104,7 @@
                     <input class="form-control" type="password" id="newPasswordAgain" required />
                 </div>
                     <br />
+                    <p class="text-warning">If you save these changes your login token will be cleared so you need to log in again next time even if you checked the Remember Me option.</p>
                     <button type="button" class="btn btn-primary" id="saveChangesButton">Save</button>
                     <a href="index.php" class="btn btn-secondary mt-1 d-block">Go back</a>
             </form>
