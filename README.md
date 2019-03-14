@@ -1,6 +1,6 @@
 # Just a another PHP login system
 
-_Please note that this is is still WIP._
+_Please note that this project is no longer actively maintained._
 
 This project started as a simple school assignment for some PHP course I was attending. Then I needed this kind of system for some website I was making and decided to start expanding. Word of warning: This project is/will be very opinionated, meaning that I will only add features that I myself find useful or interesting enough to develop.
 
