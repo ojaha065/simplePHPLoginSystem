@@ -3,7 +3,7 @@
 /*
     Simple PHP registration and login system
     https://github.com/ojaha065/simplePHPLoginSystem
-    (C) Jani Haiko, 2018
+    (C) Jani Haiko, 2019
 */
 
 $(document).ready(function(){
@@ -31,6 +31,10 @@ $(document).ready(function(){
         case "valuesNotSet": // This should never happen under normal circumstances.
             $("#errorAlert").addClass("alert-secondary");
             $("#alertMessage").html("Error: Values not set");
+            break;
+        case "accountNoLongerExists": // This should never happen under normal circumstances.
+            $("#errorAlert").addClass("alert-danger");
+            $("#alertMessage").html("There is an issue with your account and you were logged out. Please try logging in again and contact the site administrator.");
             break;
         default: $("#errorAlert").alert("close");
     }

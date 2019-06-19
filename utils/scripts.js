@@ -3,7 +3,7 @@
 /*
     Simple PHP registration and login system
     https://github.com/ojaha065/simplePHPLoginSystem
-    (C) Jani Haiko, 2018
+    (C) Jani Haiko, 2019
 */
 
 // Source: https://stackoverflow.com/questions/19491336/get-url-parameter-jquery-or-how-to-get-query-string-values-in-js

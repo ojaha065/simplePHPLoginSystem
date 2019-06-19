@@ -1,1 +1,1 @@
-<?php $host="localhost";$port="3306";$databaseName="mydatabase";$databaseUsername="root";$databasePassword=""; ?>
+<?php $host="localhost";$port="3306";$databaseName="loginDev";$databaseUsername="root";$databasePassword=""; ?>

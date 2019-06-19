@@ -62,16 +62,16 @@
     <!--
         Simple PHP registration and login system
         https://github.com/ojaha065/simplePHPLoginSystem
-        (C) Jani Haiko, 2018
+        (C) Jani Haiko, 2019
     -->
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no" />
         <title>Log In</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" type="text/css" />
         <link rel="stylesheet" href="css/styles_login.css" type="text/css" media="all" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="utils/scripts.js"></script>
         <script src="config/config.js"></script>
         <script src="js/scripts_login.js"></script>
@@ -113,7 +113,7 @@
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
             <a id="selfRegistrationLink" href="register.php">Create account</a>
-            <small class="fixed-bottom">Version Beta 0.7.8</small>
+            <small class="fixed-bottom">Version Beta 0.7.9</small>
         </div>
     </body>
 </html>

@@ -35,7 +35,7 @@
     <!--
         Simple PHP registration and login system
         https://github.com/ojaha065/simplePHPLoginSystem
-        (C) Jani Haiko, 2018
+        (C) Jani Haiko, 2019
     -->
     <head>
         <meta charset="UTF-8" />

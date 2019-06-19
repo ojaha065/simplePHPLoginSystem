@@ -2,7 +2,7 @@
     /*
         Simple PHP registration and login system
         https://github.com/ojaha065/simplePHPLoginSystem
-        (C) Jani Haiko, 2018
+        (C) Jani Haiko, 2019
     */
 
     require_once "../config/config.php";
@@ -59,13 +59,13 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1.0,shrink-to-fit=no" />
         <title>Admin panel</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"> <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"> <!-- Font Awesome -->
         <link rel="stylesheet" href="../css/styles_admin_main.css" type="text/css" media="all" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script src="../config/config.js"></script>
         <script src="../utils/scripts.js"></script>
         <script src="../js/scripts_admin_main.js"></script>
@@ -125,14 +125,14 @@
                                     <small>You cannot edit or see passwords here!</small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="modify_accessLevel">AccessLevel</label>
+                                    <label for="modify_accessLevel">Access Level</label>
                                     <select class="form-control" id="modify_accessLevel" required>
                                         <option value="admin">Admin</option>
                                         <option value="user">User</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="modify_lastLogin">LastLogin</label>
+                                    <label for="modify_lastLogin">Last Login</label>
                                     <input type="text" class="form-control" id="modify_lastLogin" readonly />
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="modify_reset" />
