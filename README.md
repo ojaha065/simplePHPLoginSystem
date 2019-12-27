@@ -78,7 +78,7 @@ If you are also using the front-end user interface I provide, then you can/must 
 | $forceHTTPS                  |Redirects all non-HTTPS connections to HTTPS and sends HSTS | false        | Boolean           |
 
 ##### About $forceHTTPS
-In 2018 it's considered a huge security risk to not use HTTPS when dealing with any kind of sensitive information (like passwords). That's why it's very highly recommended to only use hosting solutions that support it and change this option to true. Nowadays you can even get the SSL certificate completely free from [Let's Encrypt](https://letsencrypt.org/), so there's no reasons to not use it. However, on some (badly-configured) environments SERVER\["HTTPS"] superglobal is not defined even when HTTPS is in fact used. That results in a endless loop of redirecting. I myself learned that the hard way. That's why this setting is not enabled by default.
+In 2019 it's considered a huge security risk to not use HTTPS when dealing with any kind of sensitive information (like passwords). That's why it's very highly recommended to only use hosting solutions that support it and change this option to true. Nowadays you can even get the SSL certificate completely free from [Let's Encrypt](https://letsencrypt.org/), so there's no reasons to not use it. However, on some (badly-configured) environments SERVER\["HTTPS"] superglobal is not defined even when HTTPS is in fact used. That results in a endless loop of redirecting. I myself learned that the hard way.
 
 
 #### Config options in config.js

@@ -44,9 +44,9 @@
     // Also use similar setting in config.php.
     $allowUsernameChange = true;
 
-    // Forces users to access the page via secure connection (highly recommended).
+    // Forces users to access the page via a secure connection (highly recommended).
     // Might cause issues on some hosts.
-    $forceHTTPS = false;
+    $forceHTTPS = true;
 
     // Config options end here
     /////////////////////////
@@ -64,6 +64,8 @@
 
         if(!$isHTTPS){
             header("Strict-Transport-Security: max-age=1000");
+            header("X-Frame-Options: DENY");
+            header("X-XSS-Protection: 1;mode=block");
             header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
             die();
         }
